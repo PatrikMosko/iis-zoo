@@ -24,6 +24,7 @@ class CreateFeedingTable extends Migration
             $table->foreign('user_id')
                 ->references('id')->on('users');
             $table->string('amount_of_food'); // string?
+            $table->string('unit');
             $table->string('description');
             $table->dateTime('date_time');
             $table->timestamps();

@@ -30,23 +30,25 @@ class FeedingTableSeeder extends Seeder
 
         $feed1 = new Feeding();
         $feed1->user_id = $employee2->id;
-        $feed1->amount_of_food = '10 kg';
+        $feed1->amount_of_food = '10';
+        $feed1->unit = 'kg';
         $feed1->description = 'be careful animal is dangerous';
         $feed1->date_time = $dt;
         $feed1->save();
 
         $feed2 = new Feeding();
         $feed2->user_id = $employee->id;
-        $feed2->amount_of_food = '8 mg';
+        $feed2->amount_of_food = '8';
+        $feed2->unit = 'g';
         $feed2->date_time = $dt->addDays(1);
         $feed2->save();
 
         $feed3 = new Feeding();
         $feed3->user_id = $employee->id;
-        $feed3->amount_of_food = '2 kg';
+        $feed3->amount_of_food = '2';
+        $feed3->unit = 'kg';
         $feed3->date_time = $dt->addDays(2);
         $feed3->save();
-
 
         $feed1->animals()->attach($animal);
         $feed2->animals()->attach($animal2);

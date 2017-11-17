@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
+use Auth;
 
 class SettingsController extends Controller
 {
@@ -17,9 +18,8 @@ class SettingsController extends Controller
      */
     public function __construct()
     {
-//        parent::__construct(); // get global variables
+    // parent::__construct(); // get global variables
         $this->middleware('auth');
-
         //$this->isUserAdmin = session()->get('isUserAdmin');
     }
 
@@ -33,8 +33,6 @@ class SettingsController extends Controller
             ->select('role_user.role_id', 'users.user_name', 'users.email', 'users.id')
             ->get();
 //        var_dump($users);
-
-
         return view('settings')->with(['users' => $users]);
     }
 

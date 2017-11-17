@@ -25,10 +25,10 @@
                         <a href="{{ url('/') }}">Home</a>
                     </li>
                     &nbsp;<li>
-                        <a href="{{ url('Feeding') }}">Feeding</a>
+                        <a href="{{ url('Feeding/feeding') }}">Feeding</a>
                     </li>
                     &nbsp;<li>
-                        <a href="{{ url('Feeding') }}">Cleaning</a>
+                        <a href="#">Cleaning</a>
                     </li>
                     {{--{{ $isUserAdmin  }}--}}
                     {{--@if($isUserAdmin)--}}
@@ -37,7 +37,7 @@
                     </li>
                     {{--@endif--}}
                     <li>
-                        <a href="{{ url('/settings') }}">User Settings</a>
+                        <a href="#">User Settings</a>
                     </li>
                 </ul>
         @endauth
