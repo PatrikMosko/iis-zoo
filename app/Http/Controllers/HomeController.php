@@ -12,9 +12,14 @@ class HomeController extends Controller
      *
      * @return void
      */
+
     public function __construct()
     {
+//        parent::__construct(); // get global variables
+
         $this->middleware('auth');
+        //$this->isUserAdmin = session()->get('isUserAdmin');
+
     }
 
     /**
@@ -22,9 +27,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $name = Auth::user();
-        return view('home');
+        //$this->isUserAdmin = $request->user()->hasRole('admin');
+
+        return view('home');//->with('isUserAdmin', $isUserAdmin);
     }
+
 }
