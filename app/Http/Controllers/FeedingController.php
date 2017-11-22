@@ -9,6 +9,7 @@ use DB;
 use Illuminate\Http\Request;
 
 use \App\Feeding;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Input;
 
 class FeedingController extends Controller
@@ -21,6 +22,8 @@ class FeedingController extends Controller
     {
         $this->middleware('auth');
     }
+
+    // TODO find feeding
 
     // get all feedings
     public function index()
@@ -51,11 +54,13 @@ class FeedingController extends Controller
             $this->all_animals[$animal->name] = $animal->name;
         });
 
+        $actual_user = $feeding->users()->first()->user_name;
+
         $all_users = $this->all_users;
         $all_outlet_names = $this->all_outlets;
         $all_animal_names = $this->all_animals;
 
-        return view('Feeding/edit', compact(['feeding','all_users','all_outlet_names', 'all_animal_names']));
+        return view('Feeding/edit', compact(['feeding','all_users','all_outlet_names', 'all_animal_names', 'actual_user']));
     }
 
     public function update(Request $request, $id)
@@ -64,14 +69,14 @@ class FeedingController extends Controller
         // validation of input
         request()->validate([
             'handler' => 'required',
-            'outlet' => 'required',
             'amount' => 'required|numeric',
             'unit' => 'required',
-            'animal' => 'required'
+            'animal' => 'required',
+            'date_time' => 'required'
         ]);
 
         // todo update date
-        // todo saved values into form inputs
+        // todo saved values into form input
 
         // get specific feeding
         $feeding = Feeding::find($id);
@@ -94,7 +99,9 @@ class FeedingController extends Controller
         $feeding->unit = $params['unit'];
         // update foreign key for user
         $feeding->user_id = $new_user_id;
+        $feeding->date_time = $params['date_time'];
         $feeding->save();
+//        dd($feeding->date_time);
 
         /*
          *  update animal
@@ -104,9 +111,23 @@ class FeedingController extends Controller
         $feeding->animals()->updateExistingPivot($old_animal_id, ['animal_id' => $new_animal_id], false);
 
 
-        // update instance feeding-animal
-
         return redirect()->route('feeding.index')
             ->with(['success','User updated successfully']);
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $feeding = Feeding::find($id);
+        $feeding->delete();
+        // detach feedings from pivot table
+        $feeding->animals()->detach();
+
+        return redirect()->route('feeding.index')
+            ->with(['success','User deleted successfully']);
     }
 }

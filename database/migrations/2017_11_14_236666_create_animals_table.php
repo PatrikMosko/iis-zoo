@@ -19,7 +19,7 @@ class CreateAnimalsTable extends Migration
             $table->increments('id');
             $table->integer('outlet_id')->unsigned();
             $table->foreign( 'outlet_id')
-                ->references('id')->on('outlets');
+                ->references('id')->on('outlets')->onDelete('cascade');
             $table->string('name');
             $table->timestamps();
         });

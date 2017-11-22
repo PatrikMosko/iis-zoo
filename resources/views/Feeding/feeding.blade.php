@@ -9,7 +9,7 @@
         </div>
     @endif
     <!-- Table -->
-    <table class="table">
+    <table class="table table-bordered">
         <tr>
             <th>Date&time</th>
             <th>Handler</th>
@@ -27,8 +27,11 @@
                 <td>{{ $feeding->amount_of_food }} {{ $feeding->unit }}</td>
                 <td>{{ $animal->name }}</td>
                 <td>
-                    <a href="{{ route('feeding.edit', $feeding->id) }}" class="btn btn-default">Edit</a>
-                    <a href="#" class="btn btn-default">Delete</a>
+                    <a href="{{ route('feeding.edit', $feeding->id) }}" class="btn btn-primary">Edit</a>
+
+                    {!! Form::open(['method' => 'DELETE','route' => ['feeding.destroy', $feeding->id],'style'=>'display:inline']) !!}
+                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                    {!! Form::close() !!}
                 </td>
             </tr>
             @endforeach

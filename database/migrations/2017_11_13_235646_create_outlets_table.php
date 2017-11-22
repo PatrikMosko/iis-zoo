@@ -15,7 +15,6 @@ class CreateOutletsTable extends Migration
     {
         Schema::create('outlets', function (Blueprint $table) {
             Schema::dropIfExists('outlets');
-
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
