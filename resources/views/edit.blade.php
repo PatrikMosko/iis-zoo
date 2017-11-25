@@ -6,9 +6,6 @@
             <div class="pull-left">
                 <h2>Edit user</h2>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('settings.index') }}"> Back</a>
-            </div>
         </div>
     </div>
 
@@ -26,8 +23,13 @@
     {!! Form::model($user, ['method' => 'PATCH','route' => ['settings.update', $user->id]]) !!}
     {{csrf_field()}}
     {{ method_field('PATCH') }}
-
     @include('form')
     {!! Form::close() !!}
+
+    <div class="row">
+        <div class="pull-right">
+            <a class="btn btn-primary" href="{{ route('settings.index') }}"> Back</a>
+        </div>
+    </div>
 
 @endsection

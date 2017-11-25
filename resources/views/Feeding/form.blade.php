@@ -20,10 +20,18 @@
             {{--<strong>Outlet:</strong>--}}
             {{--{!! Form::text('outlet', , ['class' => 'form-control']) !!}--}}
         {{--</div>--}}
-        <div class="form-group">
-            <strong>Amount of food</strong>
-            {!! Form::text('amount', $feeding->amount_of_food, array('placeholder' => 'number','class' => 'form-control')) !!}
-            {!! Form::select('unit', ['g' => 'g', 'kg' => 'kg'], $feeding->unit , ['class' => 'form-control']) !!}
+        <strong>Amount of food</strong>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="form-group">
+                    {!! Form::text('amount', $feeding->amount_of_food, ['placeholder' => 'please enter amount...', 'class' => 'form-control']) !!}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    {!! Form::select('unit', ['g' => 'g', 'kg' => 'kg'], $feeding->unit , ['class' => 'form-control']) !!}
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <strong>Animal</strong>

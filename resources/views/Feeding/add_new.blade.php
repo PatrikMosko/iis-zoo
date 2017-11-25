@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="text-center">add new</h1>
+    <h1 class="text-center">Add new feeding</h1>
 
     {{ Form::open(array('route' => 'feeding.store')) }}
 
@@ -27,10 +27,18 @@
             {{--<strong>Outlet:</strong>--}}
             {{--{!! Form::text('outlet', , ['class' => 'form-control']) !!}--}}
             {{--</div>--}}
-            <div class="form-group">
-                <strong>Amount of food</strong>
-                {!! Form::text('amount', null, ['placeholder' => 'please enter amount...', 'class' => 'form-control']) !!}
-                {!! Form::select('unit', ['g' => 'g', 'kg' => 'kg'], null , ['class' => 'form-control']) !!}
+            <strong>Amount of food</strong>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="form-group">
+                        {!! Form::text('amount', null, ['placeholder' => 'please enter amount...', 'class' => 'form-control']) !!}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        {!! Form::select('unit', ['g' => 'g', 'kg' => 'kg'], null , ['class' => 'form-control']) !!}
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <strong>Animal</strong>

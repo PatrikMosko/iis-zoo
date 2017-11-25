@@ -42,7 +42,7 @@
     <div class="pull-right">
         <a href="{{ route('feeding.create')  }}" class="btn btn-default">
             <span class="glyphicon glyphicon-plus"></span>
-            Add new feeding
+            Add new
         </a>
     </div>
 @endsection
