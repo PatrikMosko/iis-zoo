@@ -16,6 +16,7 @@
             <th>Outlet</th>
             <th>Amount of food</th>
             <th>Animal</th>
+            <th>Decription</th>
             <th>Action</th>
         </tr>
         @foreach($all_feedings as $feeding)
@@ -26,6 +27,7 @@
                 <td>{{ $animal->outlet->name }}</td>
                 <td>{{ $feeding->amount_of_food }} {{ $feeding->unit }}</td>
                 <td>{{ $animal->name }}</td>
+                <td>{{ $feeding->description  }}</td>
                 <td>
                     <a href="{{ route('feeding.edit', $feeding->id) }}" class="btn btn-primary">Edit</a>
 
@@ -36,6 +38,11 @@
             </tr>
             @endforeach
         @endforeach
-
     </table>
+    <div class="pull-right">
+        <a href="{{ route('feeding.create')  }}" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus"></span>
+            Add new feeding
+        </a>
+    </div>
 @endsection

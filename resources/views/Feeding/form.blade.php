@@ -1,8 +1,10 @@
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
         <div class="form-group">
+            <strong>Date&time:</strong>
             <div class='input-group date' id='datetimepicker1'>
-                {!!Form::text('date_time', null,
+                {!!Form::text('date_time', $feeding->date_time,
                     array('class' => 'form-control', 'placeholder' => 'enter date and time'))
                 !!}
                 <span class="input-group-addon">
@@ -23,10 +25,14 @@
             {!! Form::text('amount', $feeding->amount_of_food, array('placeholder' => 'number','class' => 'form-control')) !!}
             {!! Form::select('unit', ['g' => 'g', 'kg' => 'kg'], $feeding->unit , ['class' => 'form-control']) !!}
         </div>
-
         <div class="form-group">
             <strong>Animal</strong>
             {!! Form::select('animal', $all_animal_names, null, ['class' => 'form-control']) !!}
+            {{--todo selected animal rip--}}
+        </div>
+        <div class="form-group">
+            <strong>Description</strong>
+            {!! Form::text('description', null, ['placeholder' => 'please enter description...', 'class' => 'form-control']) !!}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">

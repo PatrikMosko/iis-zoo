@@ -34,6 +34,40 @@ class FeedingController extends Controller
         return view('Feeding/feeding', compact('all_feedings'));
     }
 
+    public function create()
+    {
+        $users = User::all()->pluck('user_name','id'); // get associative array 'id' => 'user_name'
+        $animals = Animal::all()->pluck('name','id');
+
+        return view('Feeding/add_new', compact('users', 'animals'));
+    }
+
+    public function store(Request $request)
+    {
+        $params = $request->all();
+        // todo osetrit
+        // validation of input
+//        request()->validate([
+//            'handler' => 'required',
+//            'amount' => 'required|numeric',
+//            'unit' => 'required',
+//            'animal' => 'required',
+//            'date_time' => 'required'
+//        ]);
+
+        $new_feeding = new Feeding();
+        $new_feeding->user_id = current($params['handler']); // pass user_id directly from blade, get value from associative array
+        $new_feeding->amount_of_food = $params['amount'];
+        $new_feeding->description = $params['description'];
+        $new_feeding->unit = $params['unit'];
+        $new_feeding->save();
+
+        // update animal pivot table
+        $new_feeding->animals()->attach(current($params['animal']));
+
+        return redirect()->route('feeding.index');
+    }
+
     public function edit($id)
     {
         $feeding = Feeding::find($id);
@@ -59,6 +93,10 @@ class FeedingController extends Controller
         $all_users = $this->all_users;
         $all_outlet_names = $this->all_outlets;
         $all_animal_names = $this->all_animals;
+
+        //todo
+//        $feeding->animals()->first()->where()
+//        $actual_animal_name =
 
         return view('Feeding/edit', compact(['feeding','all_users','all_outlet_names', 'all_animal_names', 'actual_user']));
     }
