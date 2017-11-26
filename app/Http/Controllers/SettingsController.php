@@ -28,12 +28,16 @@ class SettingsController extends Controller
      */
     public function index () {
 
-        $users = \DB::table('users')
-            ->join('role_user', 'users.id', '=', 'role_user.user_id')
-            ->select('role_user.role_id', 'users.user_name', 'users.email', 'users.id')
-            ->get();
-//        var_dump($users);
+        $users = User::all();
+
+        //dd($users);
         return view('settings')->with(['users' => $users]);
+    }
+
+    public function show($id){
+        $user = User::find($id);
+
+        return view('detail', compact('user'));
     }
 
     /**

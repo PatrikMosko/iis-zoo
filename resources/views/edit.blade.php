@@ -31,5 +31,4 @@
             <a class="btn btn-primary" href="{{ route('settings.index') }}"> Back</a>
         </div>
     </div>
-
 @endsection

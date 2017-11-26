@@ -21,6 +21,10 @@ class UserTableSeeder extends Seeder
         $employee->user_name = 'majko';
         $employee->email = 'employe@example.com';
         $employee->password = bcrypt('poklop');
+        $employee->full_name = 'Majko Mrkvicka';
+        $employee->birth_date = '21.5.1996';
+        $employee->phone = '0908123456';
+        $employee->is_activated = true;
         $employee->save();
 
 
@@ -28,12 +32,20 @@ class UserTableSeeder extends Seeder
         $admin->user_name = 'manazer123';
         $admin->email = 'manager@example.com';
         $admin->password = bcrypt('poklop');
+        $admin->full_name = 'John Doe';
+        $admin->birth_date = '27.4.1987';
+        $admin->phone = '0908123458';
+        $admin->is_activated = true;
         $admin->save();
 
         $admin2 = new User();
         $admin2->user_name = 'manazer999';
         $admin2->email = 'manager99@example.com';
         $admin2->password = bcrypt('poklop');
+        $admin2->full_name = 'Axel Black';
+        $admin2->birth_date = '11.2.1991';
+        $admin2->phone = '0908123456';
+        $admin2->is_activated = true;
         $admin2->save();
 
         $employee->roles()->attach($role_employee);
