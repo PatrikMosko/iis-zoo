@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('full_name');
             $table->date('birth_date');
-            $table->integer('phone');
-            $table->boolean('is_activated');
+            $table->string('phone');
+            $table->boolean('is_active');
             $table->rememberToken();
             $table->timestamps();
         });

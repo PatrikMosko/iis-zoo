@@ -1,11 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
+    <div class="row text-center">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit user</h2>
-            </div>
+            <h2>Edit user</h2>
         </div>
     </div>
 

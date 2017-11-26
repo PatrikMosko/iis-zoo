@@ -42,6 +42,12 @@
                 //http://momentjs.com/docs/#/displaying/format/
                 format: 'YYYY-MM-DD HH:mm:ss'
             });
+            $('#just_date').datetimepicker({
+                sideBySide: true,
+                locale: 'en', // sk or en
+                //http://momentjs.com/docs/#/displaying/format/
+                format: 'YYYY-MM-DD HH:mm:ss'
+            });
         });
     </script>
 

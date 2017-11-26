@@ -2,11 +2,8 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Settings</h2>
-            </div>
-
+        <div class="col-md-12 margin-tb">
+            <h2>Settings</h2>
         </div>
     </div>
 
@@ -30,7 +27,7 @@
             <th>Phone</th>
             <th>Date</th>
             <th>Account status</th>
-            <th width="280px">Action</th>
+            <th>Action</th>
         </tr>
         @foreach ($users as $user)
             <tr>
@@ -43,7 +40,7 @@
                 <td> {{ $user->phone }}</td>
                 <td> {{ $user->birth_date }}</td>
                 <td>
-                    @if ($user->is_activated == 1) active @else inactive @endif
+                    @if ($user->is_active == 1) active @else inactive @endif
                 </td>
                 <td>
                     <a class="btn btn-default" href="{{ route('settings.show',$user->id) }}">Show detail</a>

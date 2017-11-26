@@ -43,7 +43,7 @@
         <div class="col-md-2">
             <strong>Account status:</strong>
             <h3>
-                @if ($user->is_activated == 1) active @else inactive @endif
+                @if ($user->is_active) active @else inactive @endif
             </h3>
         </div>
     </div>

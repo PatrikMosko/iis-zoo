@@ -10,6 +10,7 @@ use Auth;
 class SettingsController extends Controller
 {
     public $isUserAdmin;
+    protected $fillable=['full_name'];
 
     /**
      * Create a new controller instance.
@@ -49,8 +50,9 @@ class SettingsController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+        $account_status = $user->is_active;
 //        print_r($user);
-        return view('edit', compact('user'));
+        return view('edit', compact('user','account_status'));
     }
 
 
@@ -60,13 +62,20 @@ class SettingsController extends Controller
         request()->validate([
             'user_name' => 'required',
             'email' => 'required',
-            'role' => 'required'
+            'role' => 'required',
+            'full_name' => 'required',
+            'phone' => 'required',
+            'birth_date' => 'required',
+            'is_active' => 'required'
         ]);
-
 
         $user_name = $request->get('user_name');
         $email = $request->get('email');
         $role = $request->get('role');
+        $full_name = $request->get('full_name');
+        $phone = $request->get('phone');
+        $birth_date = $request->get('birth_date');
+        $is_active = $request->get('is_active');
 
         $user = User::find($id);
 
@@ -80,9 +89,16 @@ class SettingsController extends Controller
             $newRoleId = 1;
         }
 
-        // update instance
-        $user->update($request->all());
+        // first item in select is active thats why
+        if(!$is_active) {
+            $is_active = true;
+        } else {
+            $is_active = false;
+        }
 
+        // update instance
+        $user->where('id', '=', $user->id)->update(['user_name' => $user_name, 'is_active' => $is_active, 'full_name' => $full_name,
+            'phone' => $phone, 'birth_date' => $birth_date, 'email' => $email]);
         /*
          *  update pivot
          */
