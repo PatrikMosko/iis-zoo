@@ -30,6 +30,9 @@
                     &nbsp;<li>
                         <a href="#">Cleaning</a>
                     </li>
+                    <li>
+                        <a href="{{ url('Animals/animals') }}">Animals</a>
+                    </li>
                     {{--{{ $isUserAdmin  }}--}}
                     {{--@if($isUserAdmin)--}}
                     <li>

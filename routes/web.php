@@ -14,5 +14,6 @@
 //Route::get('/home', 'ListController@show');
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('/Feeding/feeding', 'FeedingController');
+Route::resource('/Animals/animals', 'AnimalsController');
 Route::resource('/settings','SettingsController');
 Auth::routes();

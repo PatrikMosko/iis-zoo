@@ -23,7 +23,7 @@
             @foreach($feeding->animals as $animal)
             <tr>
                 <td>{{ $feeding->date_time }}</td>
-                <td>{{ $feeding->users->user_name }}</td>
+                <td><a href="{{ route('settings.show', $feeding->users->id)  }}"> {{ $feeding->users->user_name }} </a></td>
                 <td>{{ $animal->outlet->name }}</td>
                 <td>{{ $feeding->amount_of_food }} {{ $feeding->unit }}</td>
                 <td>{{ $animal->name }}</td>
