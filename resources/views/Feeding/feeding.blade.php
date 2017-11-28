@@ -22,12 +22,24 @@
         @foreach($all_feedings as $feeding)
             @foreach($feeding->animals as $animal)
             <tr>
-                <td>{{ $feeding->date_time }}</td>
-                <td><a href="{{ route('settings.show', $feeding->users->id)  }}"> {{ $feeding->users->user_name }} </a></td>
-                <td>{{ $animal->outlet->name }}</td>
-                <td>{{ $feeding->amount_of_food }} {{ $feeding->unit }}</td>
-                <td>{{ $animal->name }}</td>
-                <td>{{ $feeding->description  }}</td>
+                <td>
+                    {{ $feeding->date_time }}
+                </td>
+                <td>
+                    <a href="{{ route('settings.show', $feeding->users->id) }}"> {{ $feeding->users->user_name }} </a>
+                </td>
+                <td>
+                    {{ $animal->outlet->name }}
+                </td>
+                <td>
+                    {{ $feeding->amount_of_food }} {{ $feeding->unit }}
+                </td>
+                <td>
+                    <a href="{{ route('animals.show', $animal->id) }}"> {{ $animal->name }} </a>
+                </td>
+                <td>
+                    {{ $feeding->description  }}
+                </td>
                 <td>
                     <a href="{{ route('feeding.edit', $feeding->id) }}" class="btn btn-primary">Edit</a>
 

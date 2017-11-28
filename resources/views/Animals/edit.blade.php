@@ -25,7 +25,7 @@
 
     @include('Animals/form')
 
-    {{--{!! Form::close() !!}--}}
+    {!! Form::close() !!}
 
     <div class="row">
         <div class="pull-right">

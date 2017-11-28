@@ -76,6 +76,11 @@ class FeedingController extends Controller
         $all_outlets_obj = Outlet::all();
         $all_animals_obj = Animal::all();
 
+        /*
+         * todo rework this nasty conversions model to key=>value TO pluck!, example:
+         * User::all()->pluck('user_name','id');
+        **/
+
         $all_users_obj->each(function ($user){
             $this->all_users[$user->user_name]= $user->user_name;
         });
