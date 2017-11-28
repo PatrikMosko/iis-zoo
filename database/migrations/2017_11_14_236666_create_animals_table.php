@@ -20,6 +20,9 @@ class CreateAnimalsTable extends Migration
             $table->integer('outlet_id')->unsigned();
             $table->foreign( 'outlet_id')
                 ->references('id')->on('outlets')->onDelete('cascade');
+            $table->integer('animal_types_id')->unsigned();
+            $table->foreign( 'animal_types_id')
+                ->references('id')->on('animal_types')->onDelete('cascade');
             $table->string('name');
             $table->date('birth_date');
             $table->string('birth_country');

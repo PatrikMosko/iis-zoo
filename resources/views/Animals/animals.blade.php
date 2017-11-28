@@ -6,8 +6,9 @@
     <!-- Table -->
     <table class="table table-bordered">
         <tr>
-            <th>name</th>
-            <th>outlet</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Outlet</th>
             <th>Birth Date</th>
             <th>Birth Country</th>
             <th>Parent</th>
@@ -17,7 +18,8 @@
         </tr>
         @foreach($animals as $animal)
             <tr>
-                <td>{{ $animal->name  }}</td>
+                <td>{{ $animal->name }}</td>
+                <td>{{ $animal->animalType->type_name }}</td>
                 <td>{{ $animal->outlet->name }}</td>
                 <td>{{ $animal->birth_date }}</td>
                 <td>{{ $animal->birth_country }}</td>
@@ -25,7 +27,7 @@
                 <td>{{ $animal->occurrence_place }}</td>
                 <td>{{ $animal->description }}</td>
                 <td>
-                    <a class="btn btn-default" href="{{ route('animals.show',$animal->id) }}">Show detail</a>
+                    <a class="btn btn-default" href="{{ route('animals.show',$animal->id) }}">Detail</a>
                     <a href="{{ route('animals.edit', $animal->id) }}" class="btn btn-primary">Edit</a>
 
                     {!! Form::open(['method' => 'DELETE','route' => ['animals.destroy', $animal->id],'style'=>'display:inline']) !!}
@@ -35,10 +37,30 @@
             </tr>
         @endforeach
     </table>
-    <div class="pull-right">
-        <a href="{{ route('animals.create')  }}" class="btn btn-default">
-            <span class="glyphicon glyphicon-plus"></span>
-            Add new
-        </a>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pull-right">
+                <a href="{{ route('animals.create')  }}" class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Add new
+                </a>
+            </div>
+        </div>
     </div>
+
+    @include('Animals/animalType/animal_type')
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pull-right">
+                <a href="{{ route('animals.create_type')  }}" class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Add new
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="well invisible"></div>
+
 @endsection

@@ -27,10 +27,5 @@
 
     {!! Form::close() !!}
 
-    <div class="row">
-        <div class="pull-right">
-            <a class="btn btn-default" href="{{ route('animals.index') }}"> Back </a>
-        </div>
-    </div>
 
 @endsection

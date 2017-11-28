@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use App\Animal;
 use App\User;
+use App\AnimalType;
 
 class AnimalTableSeeder extends Seeder
 {
@@ -20,9 +21,13 @@ class AnimalTableSeeder extends Seeder
         $outlet1 = Outlet::where('id', 1)->first();
         $outlet2 = Outlet::where('id', 2)->first();
 
+        //$animal_type1 = AnimalType::where('id', 1)->first();
+        $animal_type3 = AnimalType::where('id', 3)->first();
+
         $animal1 = new Animal();
         $animal1->name = 'Rico';
         $animal1->outlet_id = $outlet1->id;
+        $animal1->animal_types_id = $animal_type3->id;
         $animal1->birth_date = $dt->addDays(1);;
         $animal1->birth_country = 'Finland';
         $animal1->parent = 'Kowalski';
@@ -33,6 +38,7 @@ class AnimalTableSeeder extends Seeder
         $animal2 = new Animal();
         $animal2->name = 'Kowalski';
         $animal2->outlet_id = $outlet2->id;
+        $animal2->animal_types_id = $animal_type3->id;
         $animal2->birth_date = $dt->addDays(1);;
         $animal2->birth_country = 'North Pole';
         $animal2->parent = 'Unknown';

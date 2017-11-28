@@ -23,6 +23,11 @@
             </div>
 
             <div class="form-group">
+                <strong>Type:</strong>
+                {!! Form::select('animal_types[]', $all_types , null, ['class' => 'form-control']) !!}
+            </div>
+
+            <div class="form-group">
                 <strong>Outlet:</strong>
                 {!! Form::select('outlet[]', $all_outlets , null, ['class' => 'form-control']) !!}
             </div>
@@ -46,7 +51,7 @@
 
             <div class="form-group">
                 <strong>Parent:</strong>
-                {!! Form::select('parent', array('unknown' => 'unknown')+ $all_animals , null, ['class' => 'form-control']) !!}
+                {!! Form::select('parent', array('Unknown' => 'Unknown')+ $all_animals , null, ['class' => 'form-control']) !!}
             </div>
 
             <div class="form-group">

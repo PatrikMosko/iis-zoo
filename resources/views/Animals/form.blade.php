@@ -10,8 +10,13 @@
         </div>
 
         <div class="form-group">
+            <strong>Type:</strong>
+            {!! Form::select('animal_types[]', $all_types , $actual_type, ['class' => 'form-control']) !!}
+        </div>
+
+        <div class="form-group">
             <strong>Outlet:</strong>
-            {!! Form::select('outlet[]', $all_outlets , $animal->outlet->name, ['class' => 'form-control']) !!}
+            {!! Form::select('outlet[]', $all_outlets , $actual_outlet, ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">

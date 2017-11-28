@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleTableSeeder::class);
         // create users with this roles
         $this->call(UserTableSeeder::class);
+        // at first create roles
+        $this->call(AnimalTypeTableSeeder::class);
         // create outlet
         $this->call(OutletSeeder::class);
         // animal
