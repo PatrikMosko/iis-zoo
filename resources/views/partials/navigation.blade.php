@@ -33,6 +33,9 @@
                     <li>
                         <a href="{{ url('Animals/animals') }}">Animals</a>
                     </li>
+                    <li>
+                        <a href="{{ url('Trainings/trainings')  }}">Education trainings</a>
+                    </li>
                     {{--{{ $isUserAdmin  }}--}}
                     {{--@if($isUserAdmin)--}}
                     <li>
