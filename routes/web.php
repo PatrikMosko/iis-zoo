@@ -12,6 +12,7 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('/Feeding/feeding', 'FeedingController');
+Route::resource('/Trainings/trainings', 'TrainingsController');
 /*
  * Animals
  */
