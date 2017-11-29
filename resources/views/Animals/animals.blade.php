@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    @include('Animals/animalType/animal_type')
+    @include('Animals/AnimalType/animal_type')
 
     <div class="row">
         <div class="col-md-12">

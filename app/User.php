@@ -40,6 +40,13 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function cleanings()
+    {
+        return $this
+            ->belongsToMany('App\Cleaning')
+            ->withTimestamps();
+    }
+
     public function feedings()
     {
         return $this
@@ -47,12 +54,12 @@ class User extends Authenticatable
 //            /-> withTimestamps();
     }
 
-    public function animals()
+    /*public function animals()
     {
         return $this
             ->belongsToMany('App\Animal')
             -> withTimestamps();
-    }
+    }*/
 
     public function authorizeRoles($roles)
     {
