@@ -13,7 +13,8 @@ class ExternalTrainingSeeder extends Seeder
     public function run()
     {
         $newExtTraining = new TrainingExternal();
-        $newExtTraining->description = 'This is desc about ext training';
+        $newExtTraining->company_name = 'Exponea';
+        $newExtTraining->company_address = 'Bottova 5, Bratislava';
         $newExtTraining->save();
 
     }
