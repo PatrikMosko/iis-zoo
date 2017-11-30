@@ -12,7 +12,11 @@ class TrainingsController extends Controller
 {
     public function index(){
 
-        return view('Trainings/trainings', compact('newExtTraining'));
+        $all_external_trainings = TrainingExternal::all();
+        $all_internal_trainings = TrainingInternal::all();
+//        dd($all_internal_trainings);
+
+        return view('Trainings/trainings', compact('all_external_trainings', 'all_internal_trainings'));
 
     }
 }

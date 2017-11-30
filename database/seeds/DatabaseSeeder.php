@@ -23,5 +23,10 @@ class DatabaseSeeder extends Seeder
         $this->call(AnimalTableSeeder::class);
         // for feeding we need outlet and animals at first
         $this->call(FeedingTableSeeder::class);
+        // create child seeders at first
+        $this->call(ExternalTrainingSeeder::class);
+        $this->call(InternalTrainingSeeder::class);
+        // parent
+        $this->call(TrainingTableSeeder::class);
     }
 }
