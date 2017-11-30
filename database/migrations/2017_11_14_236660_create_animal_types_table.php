@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInternalTrainingsTable extends Migration
+class CreateAnimalTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,19 @@ class CreateInternalTrainingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('internal_trainings', function (Blueprint $table) {
-            Schema::dropIfExists('internal_trainings');
+        Schema::create('animal_types', function (Blueprint $table) {
+            Schema::dropIfExists('animal_types');
 
             $table->increments('id');
+
+            // type-name
+            $table->string('type_name');
+            // brief description of particular animal type
+            $table->string('description');
+
             $table->timestamps();
         });
+
     }
 
     /**
@@ -28,6 +35,6 @@ class CreateInternalTrainingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('internal_trainings');
+        Schema::dropIfExists('animal_types');
     }
 }

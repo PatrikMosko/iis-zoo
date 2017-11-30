@@ -19,7 +19,7 @@
         @foreach($animals as $animal)
             <tr>
                 <td>{{ $animal->name }}</td>
-                <td>{{ $animal->animalType->type_name }}</td>
+                <td>{{ $animal->animal_types->type_name }}</td>
                 <td>{{ $animal->outlet->name }}</td>
                 <td>{{ $animal->birth_date }}</td>
                 <td>{{ $animal->birth_country }}</td>

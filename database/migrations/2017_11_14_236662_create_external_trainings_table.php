@@ -17,8 +17,12 @@ class CreateExternalTrainingsTable extends Migration
             Schema::dropIfExists('training_externals');
 
             $table->increments('id');
+
+            // name of the company
             $table->string('company_name');
+            // address of the company
             $table->string('company_address');
+
             $table->timestamps();
         });
     }

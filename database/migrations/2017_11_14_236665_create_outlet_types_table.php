@@ -21,7 +21,7 @@ class CreateOutletTypesTable extends Migration
             // type-name
             $table->string('name');
             // time required for cleaning particular outlet type
-            $table->time('cleaning_time');
+            $table->string('cleaning_time');
             // number of users required/needed for cleaning particular outlet type
             $table->integer('req_users_num')->unsigned();
 

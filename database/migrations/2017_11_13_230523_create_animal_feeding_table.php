@@ -17,8 +17,12 @@ class CreateAnimalFeedingTable extends Migration
             Schema::dropIfExists('animal_feeding');
 
             $table->increments('id');
+
+            // automatic foreign key pointing to feedings table
             $table->integer('feeding_id')->unsigned();
+            // automatic foreign key pointing to animals table
             $table->integer('animal_id')->unsigned();
+
             $table->timestamps();
         });
     }

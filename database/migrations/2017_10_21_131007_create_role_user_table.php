@@ -17,8 +17,12 @@ class CreateRoleUserTable extends Migration
             Schema::dropIfExists('role_user');
 
             $table->increments('id');
+
+            // automatic foreign key pointing to roles table
             $table->integer('role_id')->unsigned();
+            // automatic foreign key pointing to users table
             $table->integer('user_id')->unsigned();
+
             $table->timestamps();
         });
     }

@@ -17,8 +17,12 @@ class CreateRolesTable extends Migration
             Schema::dropIfExists('roles');
 
             $table->increments('id');
+
+            //
             $table->string('name');
+            //
             $table->string('description');
+
             $table->timestamps();
         });
     }

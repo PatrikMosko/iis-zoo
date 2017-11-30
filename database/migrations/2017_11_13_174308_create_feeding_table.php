@@ -19,13 +19,20 @@ class CreateFeedingTable extends Migration
 
             $table->increments('id');
 
+            // amount of food to be consumned by particular animal
+            $table->string('amount_of_food'); // string?
+            // unit used to measure weight of food (g, Kg, lb, ...)
+            $table->string('unit');
+            // brief description for particular feeding
+            $table->string('description');
+            // date of the feeding
+            $table->dateTime('date_time');
+
+            // foreign key pointing to users table
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')->on('users')->onDelete('cascade');
-            $table->string('amount_of_food'); // string?
-            $table->string('unit');
-            $table->string('description');
-            $table->dateTime('date_time');
+
             $table->timestamps();
         });
 

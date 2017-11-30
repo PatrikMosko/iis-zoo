@@ -17,5 +17,9 @@ class ExternalTrainingSeeder extends Seeder
         $newExtTraining->company_address = 'Bottova 5, Bratislava';
         $newExtTraining->save();
 
+        $newExtTraining2 = new TrainingExternal();
+        $newExtTraining2->company_name = 'SolarWinds';
+        $newExtTraining2->company_address = 'Janska 20, Brno';
+        $newExtTraining2->save();
     }
 }
