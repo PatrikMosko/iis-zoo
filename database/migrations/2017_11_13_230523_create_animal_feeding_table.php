@@ -14,6 +14,8 @@ class CreateAnimalFeedingTable extends Migration
     public function up()
     {
         Schema::create('animal_feeding', function (Blueprint $table) {
+            Schema::dropIfExists('animal_feeding');
+
             $table->increments('id');
             $table->integer('feeding_id')->unsigned();
             $table->integer('animal_id')->unsigned();

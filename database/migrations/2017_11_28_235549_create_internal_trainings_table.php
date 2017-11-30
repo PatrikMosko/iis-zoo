@@ -14,6 +14,8 @@ class CreateInternalTrainingsTable extends Migration
     public function up()
     {
         Schema::create('internal_trainings', function (Blueprint $table) {
+            Schema::dropIfExists('internal_trainings');
+
             $table->increments('id');
             $table->timestamps();
         });

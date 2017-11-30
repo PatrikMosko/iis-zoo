@@ -14,11 +14,24 @@ class CreateTrainingsTable extends Migration
     public function up()
     {
         Schema::create('trainings', function (Blueprint $table) {
+            Schema::dropIfExists('trainings');
+
             $table->increments('id');
+
+            // date when particular training was held
             $table->date('date');
+            // Name of the course/training
             $table->string('name');
+            // todo
             $table->integer('trainingable_id');
+            // todo
             $table->string('trainingable_type');
+
+            // foreign key pointing to animal_types table
+            $table->integer('animal_type_id')->unsigned();
+            $table->foreign('animal_type_id')
+                ->references('id')->on('animal_types')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

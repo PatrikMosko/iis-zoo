@@ -47,6 +47,13 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function trainings()
+    {
+        return $this
+            ->belongsToMany('App\Training')
+            ->withTimestamps();
+    }
+
     public function feedings()
     {
         return $this

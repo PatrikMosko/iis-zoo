@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeedingTable extends Migration
+class CreateTrainingUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,18 @@ class CreateFeedingTable extends Migration
      */
     public function up()
     {
-
-        Schema::create('feedings', function (Blueprint $table) {
-            Schema::dropIfExists('feedings');
+        Schema::create('training_user', function (Blueprint $table) {
+            Schema::dropIfExists('training_user');
 
             $table->increments('id');
 
+            // automatic foreign key pointing to cleanings table
+            $table->integer('training_id')->unsigned();
+            // automatic foreign key pointing to users table
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')
-                ->references('id')->on('users')->onDelete('cascade');
-            $table->string('amount_of_food'); // string?
-            $table->string('unit');
-            $table->string('description');
-            $table->dateTime('date_time');
+
             $table->timestamps();
         });
-
     }
 
     /**
@@ -38,7 +34,6 @@ class CreateFeedingTable extends Migration
      */
     public function down()
     {
-
-        Schema::dropIfExists('feedings');
+        Schema::dropIfExists('training_user');
     }
 }

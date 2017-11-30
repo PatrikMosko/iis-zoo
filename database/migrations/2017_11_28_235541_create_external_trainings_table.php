@@ -14,6 +14,8 @@ class CreateExternalTrainingsTable extends Migration
     public function up()
     {
         Schema::create('training_externals', function (Blueprint $table) {
+            Schema::dropIfExists('training_externals');
+
             $table->increments('id');
             $table->string('company_name');
             $table->string('company_address');

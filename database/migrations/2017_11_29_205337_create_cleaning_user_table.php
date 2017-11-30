@@ -14,9 +14,15 @@ class CreateCleaningUserTable extends Migration
     public function up()
     {
         Schema::create('cleaning_user', function (Blueprint $table) {
+            Schema::dropIfExists('cleaning_user');
+
             $table->increments('id');
+
+            // automatic foreign key pointing to cleanings table
             $table->integer('cleaning_id')->unsigned();
+            // automatic foreign key pointing to users table
             $table->integer('user_id')->unsigned();
+
             $table->timestamps();
         });
     }

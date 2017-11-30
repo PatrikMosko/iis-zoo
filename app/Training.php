@@ -13,4 +13,21 @@ class Training extends Model
     {
         return $this->morphTo();
     }
+
+    public function outlet_types()
+    {
+        return $this->hasOne('App\OutletType', 'training_id');
+    }
+
+    public function animal_types()
+    {
+        return $this->belongsTo('\App\AnimalType', 'animalType_id');
+    }
+
+    public function users()
+    {
+        return $this
+            ->belongsToMany('App\Users')
+            ->withTimestamps();
+    }
 }

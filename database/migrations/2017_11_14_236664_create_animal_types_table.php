@@ -14,7 +14,8 @@ class CreateAnimalTypesTable extends Migration
     public function up()
     {
         Schema::create('animal_types', function (Blueprint $table) {
-            //Schema::dropIfExists('animal_types');
+            Schema::dropIfExists('animal_types');
+
             $table->increments('id');
             $table->string('type_name');
             $table->string('description');

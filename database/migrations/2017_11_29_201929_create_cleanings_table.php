@@ -14,16 +14,19 @@ class CreateCleaningsTable extends Migration
     public function up()
     {
         Schema::create('cleanings', function (Blueprint $table) {
+            Schema::dropIfExists('cleanings');
 
             $table->increments('id');
 
+            // date of the cleaning
+            $table->datetime('date');
+            // time of the day on which cleaning have been planned
+            $table->time('time');
+
+            // foreign key pointing to outlets table
             $table->integer('outlet_id')->unsigned();
             $table->foreign('outlet_id')
                 ->references('id')->on('outlets')->ondelete('cascade');
-
-            $table->datetime('date');
-
-            $table->time('time');
 
             $table->timestamps();
         });
