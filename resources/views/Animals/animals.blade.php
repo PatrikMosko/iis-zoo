@@ -19,7 +19,7 @@
         @foreach($animals as $animal)
             <tr>
                 <td>{{ $animal->name }}</td>
-                <td>{{ $animal->animalType->type_name }}</td>
+                <td>{{ $animal->animal_types->type_name }}</td>
                 <td>{{ $animal->outlet->name }}</td>
                 <td>{{ $animal->birth_date }}</td>
                 <td>{{ $animal->birth_country }}</td>
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    @include('Animals/animalType/animal_type')
+    @include('Animals/AnimalType/animal_type')
 
     <div class="row">
         <div class="col-md-12">

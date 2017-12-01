@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExternalTrainingsTable extends Migration
+class CreateInternalTrainingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateExternalTrainingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('training_externals', function (Blueprint $table) {
+        Schema::create('training_internals', function (Blueprint $table) {
+            Schema::dropIfExists('training_internals');
+
             $table->increments('id');
-            $table->string('company_name');
-            $table->string('company_address');
+            $table->string('place');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateExternalTrainingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('training_externals');
+        Schema::dropIfExists('training_internals');
     }
 }

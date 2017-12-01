@@ -13,7 +13,7 @@ class InternalTrainingSeeder extends Seeder
     public function run()
     {
         $newIntTraining = new TrainingInternal();
-        $newIntTraining->place = 'Main zoo building';
+        $newIntTraining->place = 'Main zoo build building';
         $newIntTraining->save();
 
         $newIntTraining2 = new TrainingInternal();

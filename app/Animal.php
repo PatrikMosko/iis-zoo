@@ -23,7 +23,7 @@ class Animal extends Model
         return $this->belongsTo('\App\Outlet', 'outlet_id');
     }
 
-    public function animalType()
+    public function animal_types()
     {
         return $this->belongsTo('\App\AnimalType', 'animal_types_id');
     }

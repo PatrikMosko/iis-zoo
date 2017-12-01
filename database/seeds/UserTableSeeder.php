@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 use App\User;
 use App\Role;
+use Carbon\Carbon;
 
 class UserTableSeeder extends Seeder
 {
@@ -22,7 +23,7 @@ class UserTableSeeder extends Seeder
         $employee->email = 'employe@example.com';
         $employee->password = bcrypt('poklop');
         $employee->full_name = 'MajkoMrkvicka';
-        $employee->birth_date = '21.5.1996';
+        $employee->birth_date = Carbon::createFromDate( 1996, 5, 21, null);
         $employee->phone = '0908123456';
         $employee->is_active = true;
         $employee->save();
@@ -33,7 +34,7 @@ class UserTableSeeder extends Seeder
         $admin->email = 'manager@example.com';
         $admin->password = bcrypt('poklop');
         $admin->full_name = 'John Doe';
-        $admin->birth_date = '27.4.1987';
+        $admin->birth_date = Carbon::createFromDate( 1987, 4, 27, null);
         $admin->phone = '0908123458';
         $admin->is_active = true;
         $admin->save();
@@ -43,7 +44,7 @@ class UserTableSeeder extends Seeder
         $admin2->email = 'manager99@example.com';
         $admin2->password = bcrypt('poklop');
         $admin2->full_name = 'Axel Black';
-        $admin2->birth_date = '11.2.1991';
+        $admin2->birth_date = Carbon::createFromDate( 1991, 2, 11, null);
         $admin2->phone = '0908123456';
         $admin2->is_active = true;
         $admin2->save();

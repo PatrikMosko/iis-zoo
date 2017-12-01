@@ -14,9 +14,15 @@ class CreateAnimalFeedingTable extends Migration
     public function up()
     {
         Schema::create('animal_feeding', function (Blueprint $table) {
+            Schema::dropIfExists('animal_feeding');
+
             $table->increments('id');
+
+            // automatic foreign key pointing to feedings table
             $table->integer('feeding_id')->unsigned();
+            // automatic foreign key pointing to animals table
             $table->integer('animal_id')->unsigned();
+
             $table->timestamps();
         });
     }

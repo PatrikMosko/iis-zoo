@@ -12,4 +12,10 @@ class AnimalType extends Model
         return $this
             ->hasMany('App\Animal');
     }
+
+    public function trainings()
+    {
+        return $this
+            ->hasMany('App\Training');
+    }
 }

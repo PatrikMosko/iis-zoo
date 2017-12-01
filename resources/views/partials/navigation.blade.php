@@ -28,7 +28,7 @@
                         <a href="{{ url('Feeding/feeding') }}">Feeding</a>
                     </li>
                     &nbsp;<li>
-                        <a href="#">Cleaning</a>
+                        <a href="{{ url('Cleanings/cleanings') }}">Cleaning</a>
                     </li>
                     <li>
                         <a href="{{ url('Animals/animals') }}">Animals</a>
