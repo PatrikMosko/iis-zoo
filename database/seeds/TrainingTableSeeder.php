@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use App\TrainingExternal;
 use App\TrainingInternal;
 use App\AnimalType;
+use App\User;
 
 use Illuminate\Database\Seeder;
 
@@ -20,15 +21,19 @@ class TrainingTableSeeder extends Seeder
         /*
          *  Trainings for animals
          */
-        $external1 = TrainingExternal::find(1); // Exponea
-        $external2 = TrainingExternal::find(2); // SolarWinds
+        $external1 = TrainingExternal::where('id', 1)->first(); // Exponea
+        $external2 = TrainingExternal::where('id', 2)->first(); // SolarWinds
 
-        $internal1 = TrainingInternal::find(1); // main building
-        $internal2 = TrainingInternal::find(2); // secondary
+        $internal1 = TrainingInternal::where('id', 1)->first(); // main building
+        $internal2 = TrainingInternal::where('id', 2)->first(); // secondary
 
-        $animalType1 = AnimalType::find(1);
-        $animalType2 = AnimalType::find(2);
-        $animalType3 = AnimalType::find(3);
+        $animalType1 = AnimalType::where('id', 1)->first();
+        $animalType2 = AnimalType::where('id', 2)->first();
+        $animalType3 = AnimalType::where('id', 3)->first();
+
+        $user1 = User::where('id', 1)->first();
+        $user2 = User::where('id', 2)->first();
+        $user3 = User::where('id', 3)->first();
 
         // create external trainings
 
@@ -93,5 +98,16 @@ class TrainingTableSeeder extends Seeder
         /*
          *  Trainings for outlets
          */ // todo
+
+
+        $newTraining ->users()->attach($user1);
+        $newTraining2->users()->attach($user2);
+        $newTraining3->users()->attach($user2);
+        $newTraining4->users()->attach($user2);
+        $newTraining5->users()->attach($user3);
+        $newTraining6->users()->attach($user1);
+        $newTraining7->users()->attach($user3);
+        $newTraining8->users()->attach($user1);
+
     }
 }

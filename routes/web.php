@@ -28,3 +28,7 @@ Route::resource('/Animals/animals', 'AnimalsController');
  */
 Route::resource('/settings','SettingsController');
 Auth::routes();
+/*
+ * cleanings
+ */
+Route::resource('/Cleanings/cleanings', 'CleaningsController');

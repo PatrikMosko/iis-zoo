@@ -45,6 +45,7 @@ class FeedingController extends Controller
     public function store(Request $request)
     {
         $params = $request->all();
+
         // todo osetrit
         // validation of input
 //        request()->validate([
@@ -157,6 +158,7 @@ class FeedingController extends Controller
         return redirect()->route('feeding.index')
             ->with(['success','User updated successfully']);
     }
+
     /**
      * Remove the specified resource from storage.
      *

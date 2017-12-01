@@ -18,8 +18,8 @@ class FeedingTableSeeder extends Seeder
     public function run()
     {
 
-        $employee = User::find(1);
-        $employee2 = User::find(2);
+        $employee = User::where('id', 1)->first();
+        $employee2 = User::where('id', 2)->first();
 
         $animal = Animal::where('id', 1)->first();
         $animal2 = Animal::where('id', 2)->first();

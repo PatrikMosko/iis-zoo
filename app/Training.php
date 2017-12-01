@@ -21,13 +21,13 @@ class Training extends Model
 
     public function animal_types()
     {
-        return $this->belongsTo('\App\AnimalType', 'animalType_id');
+        return $this->belongsTo('\App\AnimalType', 'animal_type_id');
     }
 
     public function users()
     {
         return $this
-            ->belongsToMany('App\Users')
+            ->belongsToMany('App\User')
             ->withTimestamps();
     }
 }
