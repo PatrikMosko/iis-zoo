@@ -2,91 +2,170 @@
 
 @section('content')
     <div class="row">
-        <h1>My Finished Trainings</h1>
+        <div class="col-md-12">
+            <h2>My Finished Trainings</h2>
+        </div>
     </div>
-    <hr/>
-
-    <div class="well invisible"></div>
-
     <div class="row">
-        <h1>All available Trainings</h1>
-    </div>
-    <hr/>
-
-    <div class="row">
-        <div class="col-md-5">
-            <h1>external</h1>
-            @foreach ($all_external_trainings as $external_collection)
-                <h3 style="margin-top: 60px;"><strong>Company:</strong> <em>{{$external_collection->company_name}}</em></h3>
-                <hr/>
+        <div class="col-md-4">
+            <div class="border" style="border: 1px solid lightgray; padding: 30px; margin-top: 20px">
                 <p>
-                    <strong>Address: </strong>{{$external_collection->company_address}}
+                    <strong>Company:</strong> <em>SolarWinds</em>
+                    <span>- external</span>
                 </p>
+                <p><strong>Name:</strong> <em>Training for Bird outlets</em></p>
+                <p><strong>Date:</strong> <em>2017-12-01</em></p>
+            </div>
+        </div>
+    </div>
 
-                <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>All available Trainings</h2>
+        </div>
+    </div>
 
-                <h4 style="margin-top: 30px;">Available Trainings</h4>
+    <div class="row text-center">
+        <div class="col-md-5">
+            <div class="border" style="border: 1px solid lightgray; padding: 0 30px 30px; margin-top: 20px">
+                <h3>create new training type</h3>
+                <a href="#" class="btn btn-info">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    External Company
+                </a>
+                <a href="#" class="btn btn-info">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Internal location
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>External</h2>
+            @foreach ($all_external_trainings as $external_collection)
+                <div class="border" style="border: 1px solid lightgray; padding: 0 30px 30px; margin-top: 20px">
+
+                    <h3 style="margin-top: 30px;"><strong>Company:</strong> <em>{{$external_collection->company_name}}</em></h3>
+                    <hr/>
+                    <h4>
+                        <strong>Address: </strong>
+                    </h4>
+                    <em>{{$external_collection->company_address}}</em>
+
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-md-12">
+                            <a href="#" class="btn btn-info">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                add new training
+                            </a>
+                            <a href="#" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                Edit
+                            </a>
+                            <a href="#" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                Remove
+                            </a>
+                        </div>
+                    </div>
+                    <hr>
+                    <h3 style="margin-top: 30px;">Available Trainings</h3>
 
                 @foreach ($external_collection->trainings as $training_e)
                     <div class="row">
-                        <div class="col-md-8">
-                            <strong>Name:</strong> {{ $training_e->name }}
-                            <strong>Date:</strong> {{ $training_e->date }}
-
+                        <div class="col-md-12">
+                            <br>
+                            <p><strong>Name:</strong> <em> {{ $training_e->name }} </em></p>
+                            <p><strong>Date:</strong> <em> {{ $training_e->date }} </em></p>
                         </div>
-                        <div class="col-md-4">
-                            <button class="btn btn-default" style="margin-top: 5px; display: block;">Done</button>
-                            <button class="btn btn-default" style="margin-top: 5px; display: block;">Edit</button>
-                            <button class="btn btn-default" style="margin-top: 5px; display: block;">Remove</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="#" class="btn btn-success" style="margin-top: 5px;">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                Done
+                            </a>
+                            <a href="#" class="btn btn-primary" style="margin-top: 5px;">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                Edit
+                            </a>
+                            <a href="#" class="btn btn-danger" style="margin-top: 5px;">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                Remove
+                            </a>
                         </div>
                     </div>
                 <hr/>
                 @endforeach
-
-                <a href="#" class="btn btn-default">add new training in {{$external_collection->company_name}} </a>
-
-                <hr/>
+                </div>
             @endforeach
         </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-5">
 
-            <h1>internal</h1>
+        <div class="col-md-6">
+
+            <h2>Internal</h2>
 
             @foreach ($all_internal_trainings as $internal_collection)
-                <h3 style="margin-top: 60px;">Our zoo</h3>
+                <div class="border" style="border: 1px solid lightgray; padding: 0 30px 30px; margin-top: 20px">
+                    <h3 style="margin-top: 30px;">
+                        <strong>Our zoo</strong>
+                    </h3>
 
-                <hr/><strong>location: </strong>{{$internal_collection->place}}<hr/>
+                    <h4>
+                        <hr/><strong>Location: </strong>
+                    </h4>
+                    <em>{{$internal_collection->place}}</em>
 
-                <h4 style="margin-top: 30px;">Available Trainings</h4>
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-md-12">
+                            <a href="#" class="btn btn-info">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                add training
+                            </a>
+                            <a href="#" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                Edit
+                            </a>
+                            <a href="#" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                Remove
+                            </a>
+                        </div>
+                    </div>
+                    <hr/>
+                    <h3 style="margin-top: 30px;">Available Trainings</h3>
 
                 @foreach ($internal_collection->trainings as $training_i)
-
-                <div class="row">
-                    <div class="col-md-8">
-                        <strong>Name:</strong> {{ $training_e->name }}
-                        <strong>Date:</strong> {{ $training_e->date }}
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p><strong>Name:</strong> <em>{{ $training_e->name }}</em></p>
+                            <p><strong>Date:</strong> <em>{{ $training_e->date }}</em></p>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <button class="btn btn-default" style="margin-top: 5px; display: block;">Done</button>
-                        <button class="btn btn-default" style="margin-top: 5px; display: block;">Edit</button>
-                        <button class="btn btn-default" style="margin-top: 5px; display: block;">Remove</button>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="#" class="btn btn-success" style="margin-top: 5px;">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                Done
+                            </a>
+                            <a href="#" class="btn btn-primary" style="margin-top: 5px;">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                Edit
+                            </a>
+                            <a href="#" class="btn btn-danger" style="margin-top: 5px;">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                Remove
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <hr/>
+                    <hr/>
                 @endforeach
 
-                <a href="#" class="btn btn-default">add new </a> internal training in {{$internal_collection->place}}
-
-                <hr/>
+                </div>
             @endforeach
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h3>create new training type</h3>
-            <a href="#" class="btn btn-default">External Company</a>
-            <a href="#" class="btn btn-default">Internal location</a>
         </div>
     </div>
 @endsection
