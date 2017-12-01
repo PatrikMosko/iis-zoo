@@ -17,6 +17,17 @@ class TrainingsController extends Controller
 //        dd($all_internal_trainings);
 
         return view('Trainings/trainings', compact('all_external_trainings', 'all_internal_trainings'));
+    }
 
+    public function trainingTypeCreate($type) {
+
+        if ($type == 'internal'){
+
+            return view('Trainings/TrainingType/Internal/add_new');
+
+        } else if ($type == 'external') {
+
+            return view('Trainings/TrainingType/External/add_new');
+        }
     }
 }

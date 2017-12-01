@@ -28,12 +28,14 @@
     <div class="row text-center">
         <div class="col-md-5">
             <div class="border" style="border: 1px solid lightgray; padding: 0 30px 30px; margin-top: 20px">
-                <h3>create new training type</h3>
-                <a href="#" class="btn btn-info">
+
+                <h3 style="margin-bottom: 20px">create new training type</h3>
+
+                <a href="{{ route('trainings.create_type', ['type' => 'external']) }}" class="btn btn-info">
                     <span class="glyphicon glyphicon-plus"></span>
                     External Company
                 </a>
-                <a href="#" class="btn btn-info">
+                <a href="{{ route('trainings.create_type', ['type' => 'internal']) }}" class="btn btn-info">
                     <span class="glyphicon glyphicon-plus"></span>
                     Internal location
                 </a>

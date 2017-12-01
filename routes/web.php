@@ -12,7 +12,6 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('/Feeding/feeding', 'FeedingController');
-Route::resource('/Trainings/trainings', 'TrainingsController');
 /*
  * Animals
  */
@@ -27,4 +26,11 @@ Route::resource('/Animals/animals', 'AnimalsController');
  * settings
  */
 Route::resource('/settings','SettingsController');
+
+/*
+ * Trainings
+ */
+Route::resource('/Trainings/trainings', 'TrainingsController');
+Route::get('/Trainings/trainings/trainingType/{type}', 'TrainingsController@trainingTypeCreate')->name('trainings.create_type');
+
 Auth::routes();
