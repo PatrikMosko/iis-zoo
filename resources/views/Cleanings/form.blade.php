@@ -3,7 +3,7 @@
     <div class="col-md-6">
         <div class="form-group">
             <strong>Date</strong>
-            <div class='input-group date' id='cleaning_date_picker'>
+            <div class="input-group date" id="date_picker">
                 {!!Form::text('date', $cleaning->date,
                     array('class' => 'form-control', 'placeholder' => 'enter date of cleaning...'))
                 !!}
@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
             <strong>Time</strong>
-            <div class='input-group date' id='cleaning_time_picker'>
+            <div class="input-group date" id="time_picker">
                 {!!Form::text('cleaning_time', $cleaning->cleaning_time,
                     array('class' => 'form-control', 'placeholder' => 'enter expected cleaning time...'))
                 !!}

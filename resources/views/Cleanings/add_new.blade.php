@@ -10,9 +10,9 @@
         <div class="col-md-6">
             <div class="form-group">
                 <strong>Date</strong>
-                <div class='input-group date' id='cleaning_date_picker2'>
+                <div class="input-group date" id="date_picker">
                     {!!Form::text('date', null,
-                        array('class' => 'form-control', 'placeholder' => 'please enter date of cleaning...'))
+                        array('class' => 'form-control', 'placeholder' => 'enter date of cleaning...'))
                     !!}
                     <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
@@ -20,10 +20,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <strong>Cleaning time</strong>
-                <div class='input-group date' id='cleaning_time_picker2'>
+                <strong>Time</strong>
+                <div class="input-group date" id="time_picker">
                     {!!Form::text('cleaning_time', null,
-                        array('class' => 'form-control', 'placeholder' => 'please enter expected cleaning time...'))
+                        array('class' => 'form-control', 'placeholder' => 'enter expected cleaning time...'))
                     !!}
                     <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
