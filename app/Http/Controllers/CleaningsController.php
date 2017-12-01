@@ -32,13 +32,20 @@ class CleaningsController extends Controller
 
     public function store(Request $request)
     {
-        $params = $request->all();
+        $request->validate([
+            'cleaner' => 'required',
+            'date' => 'required',
+            'cleaning_time' => 'required',
+            'description' => 'nullable'
+        ]);
 
+        $params = $request->all();
 
         $new_cleaning = new Cleaning();
         $new_cleaning->outlet_id = current($params['outlet']);
-        $new_cleaning->date = Carbon::createFromFormat('Y-m-d h:i:s', $params['date'])->toDateString();
+        $new_cleaning->date = $params['date'];
         $new_cleaning->cleaning_time = $params['cleaning_time'];
+        $new_cleaning->description = $params['description'];// ? $params['description']: '';
         $new_cleaning->save();
 
         // update animal pivot table
@@ -58,15 +65,14 @@ class CleaningsController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'cleaner' => 'required',
+            'date' => 'required',
+            'time' => 'required',
+            'description' => 'nullable'
+        ]);
+
         $params = $request->all();
-        // validation of input
-//        request()->validate([
-//            'handler' => 'required',
-//            'amount' => 'required|numeric',
-//            'unit' => 'required',
-//            'animal' => 'required',
-//            'date_time' => 'required'
-//        ]);
 
         // todo update date
         // todo saved values into form input
@@ -74,16 +80,13 @@ class CleaningsController extends Controller
         $cleaning = Cleaning::find($id);
         $old_user_id = $cleaning->user_id;
 
-        //$cleaning->date = Carbon::createFromFormat('Y-m-d h:i:s', $params['date'])->toDateString();
-        $cleaning->date = Carbon::createFromFormat('Y-m-d h:i:s', $params['date'])->toTimeString();
+        $cleaning->date = $params['date'];
         $cleaning->cleaning_time = $params['cleaning_time'];
-        $cleaning->outlet_id = $params['outlet'];
+        $cleaning->outlet_id = $params['outlet'][0];
+        $cleaning->description = $params['description'];
         $cleaning->save();
 
-        $cleaning->users()->updateExistingPivot($old_user_id, ['user_id' => $params['cleaner']], false);
-        //$pivot = $cleaning->users()->where('id', $old_user_id)->first();
-        //$pivot->user_id = $params['cleaner'];
-        dd($params['outlet']);
+        $cleaning->users()->updateExistingPivot($old_user_id, ['user_id' => $params['cleaner'][0]], false);
 
         return redirect()->route('cleanings.index')
             ->with(['success','Cleaning updated successfully!']);

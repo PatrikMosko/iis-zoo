@@ -32,6 +32,7 @@ class CleaningSeeder extends Seeder
         $cleaning2 = new Cleaning();
         $cleaning2->date = Carbon::createFromDate( 2017, 12, 2, null);
         $cleaning2->cleaning_time = Carbon::createFromTime( 10, 30, 0);
+        $cleaning2->description = 'Clean it properly!!!';
         $cleaning2->outlet_id = $outlet2->id;
         $cleaning2->save();
 

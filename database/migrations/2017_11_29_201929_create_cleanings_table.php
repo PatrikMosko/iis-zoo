@@ -22,6 +22,8 @@ class CreateCleaningsTable extends Migration
             $table->date('date');
             // time of the day on which cleaning have been planned
             $table->time('cleaning_time');
+            // description of cleaning
+            $table->string('description');
 
             // foreign key pointing to outlets table
             $table->integer('outlet_id')->unsigned();

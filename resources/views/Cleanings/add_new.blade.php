@@ -10,7 +10,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <strong>Date</strong>
-                <div class='input-group date' id='datetimepicker1'>
+                <div class='input-group date' id='cleaning_date_picker2'>
                     {!!Form::text('date', null,
                         array('class' => 'form-control', 'placeholder' => 'please enter date of cleaning...'))
                     !!}
@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <strong>Cleaning time</strong>
-                <div class='input-group date' id='timepicker1'>
+                <div class='input-group date' id='cleaning_time_picker2'>
                     {!!Form::text('cleaning_time', null,
                         array('class' => 'form-control', 'placeholder' => 'please enter expected cleaning time...'))
                     !!}
@@ -38,20 +38,15 @@
                 <strong>Outlet</strong>
                 {!! Form::select('outlet[]', $outlets, null, ['class' => 'form-control']) !!}
             </div>
+            <div class="form-group">
+                <strong>Description</strong>
+                {!! Form::text('description', null, ['placeholder' => 'please enter description...', 'class' => 'form-control']) !!}
+            </div>
         </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker({
-                    viewMode: 'years',
-                    format: 'MM/YYYY'
-                });
-            });
-        </script>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
-
     <div class="row">
         <a href="{{ route('cleanings.index')  }}" class="btn btn-default pull-right">back</a>
     </div>

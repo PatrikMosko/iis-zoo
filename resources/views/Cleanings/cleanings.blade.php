@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <h2>cleanings</h2>
+    <h2 style="font-family: 'Utopia'">cleanings</h2><br>
 
     <table class="table table-hover">
         <thead>
@@ -12,12 +12,12 @@
                 <th>Cleaning time</th>
                 <th>Cleaner</th>
                 <th>Outlet</th>
+                <th>Description</th>
                 <th>Action</th>
             </tr>
         </thead>
         @foreach($cleanings as $cleaning)
             @foreach($cleaning->users as $user)
-                {{--{{dd($cleaning)}}--}}
                 <tr>
                     <td>
                         {{ $cleaning->date }}
@@ -30,6 +30,9 @@
                     </td>
                     <td>
                         {{ $cleaning->outlets->name }}
+                    </td>
+                    <td>
+                        {{ $cleaning->description }}
                     </td>
                     <td>
                         <a href="{{ route('cleanings.edit', $cleaning->id) }}" class="btn btn-primary">Edit</a>

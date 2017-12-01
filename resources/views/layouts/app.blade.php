@@ -42,11 +42,26 @@
                 //http://momentjs.com/docs/#/displaying/format/
                 format: 'YYYY-MM-DD HH:mm:ss'
             });
+            $('#cleaning_date_picker').datetimepicker({
+                locale: 'sk',
+                format: 'YYYY-MM-DD'
+            });
+            $('#cleaning_time_picker').datetimepicker({
+                locale: 'sk',
+                format: 'HH:mm:ss'
+            });
             $('#just_date').datetimepicker({
                 sideBySide: true,
                 locale: 'en', // sk or en
-                //http://momentjs.com/docs/#/displaying/format/
                 format: 'YYYY-MM-DD HH:mm:ss'
+            });
+            $('#cleaning_date_picker2').datetimepicker({
+                locale: 'sk',
+                format: 'YYYY-MM-DD'
+            });
+            $('#cleaning_time_picker2').datetimepicker({
+                locale: 'sk',
+                format: 'HH:mm:ss'
             });
         });
     </script>

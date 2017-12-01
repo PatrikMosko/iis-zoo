@@ -125,25 +125,19 @@ class FeedingController extends Controller
         // get specific feeding
         $feeding = Feeding::find($id);
 
-        $new_user_name = $params['handler'];
-        $new_user_id = User::where('user_name', '=', $new_user_name)->first()->id;
-
-        // changing feeding where animal name was is ...
-        $old_animal_name = $feeding->animals()->first()->name;
         // use name to find our record id in model Animal
-        $old_animal_id = Animal::where('name', '=', $old_animal_name)->first()->id;
+        $new_user_id = User::where('user_name', '=', $params['handler'])->first()->id;
+        $old_animal_id = Animal::where('name', '=', $feeding->animals()->first()->name)->first()->id;
+        $new_animal_id = Animal::where('name', '=', $params['animal'])                 ->first()->id;
 
-        // need for updating pivot table
-        $new_animal_name = $params['animal'];
-        $new_animal_id = Animal::where('name', '=', $new_animal_name)->first()->id;
-
-        // update food
+        // update Amount of Food and Units
         $feeding->amount_of_food = $params['amount'];
-        // update units
         $feeding->unit = $params['unit'];
+
         // update foreign key for user
         $feeding->user_id = $new_user_id;
         $feeding->date_time = $params['date_time'];
+        $feeding->description = $params['description'];
         $feeding->save();
 //        dd($feeding->date_time);
 
