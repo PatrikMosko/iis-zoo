@@ -30,9 +30,17 @@ Route::resource('/settings','SettingsController');
 /*
  * Trainings
  */
-Route::resource('/Trainings/trainings', 'TrainingsController');
-Route::get('/Trainings/trainings/trainingType/{type}', 'TrainingsController@trainingTypeCreate')->name('trainings.create_type');
+Route::get('/Trainings/trainings/create/{id}', array('as' => 'trainings.create', 'uses' => 'TrainingsController@create'));
+Route::resource('/Trainings/trainings', 'TrainingsController',['except' => 'create']);
 
+Route::get('/Trainings/trainings/trainingType/{type}', 'TrainingsController@trainingTypeCreate')->name('trainings.create_type');
+Route::post('/Trainings/trainings/trainingType/{type}/post', 'TrainingsController@trainingTypeStore')->name('trainings.store_type');
+
+//Route::resource('/Cleanings/cleanings', 'CleaningsController', ['except' => 'destroy']);
+//Route::post(
+//    '/Cleanings/cleanings/destroy/{id}/{user}/{count}',
+//    ['as' => 'cleanings.destroy', 'uses' => 'CleaningsController@destroy']
+//);
 Auth::routes();
 /*
  * cleanings

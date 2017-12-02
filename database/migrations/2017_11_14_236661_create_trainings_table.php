@@ -20,6 +20,7 @@ class CreateTrainingsTable extends Migration
 
             // date when particular training was held
             $table->date('date');
+            $table->date('time');
             // Name of the course/training
             $table->string('name');
             // todo
@@ -28,9 +29,11 @@ class CreateTrainingsTable extends Migration
             $table->string('trainingable_type');
 
             // foreign key pointing to animal_types table
-            $table->integer('animal_type_id')->unsigned();
+            $table->integer('animal_type_id')->nullable()->unsigned();
             $table->foreign('animal_type_id')
                 ->references('id')->on('animal_types')->onDelete('cascade');
+
+
 
             $table->timestamps();
         });

@@ -39,8 +39,8 @@
                         array('class' => 'form-control', 'placeholder' => 'please enter date...'))
                     !!}
                     <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
                 </div>
             </div>
 

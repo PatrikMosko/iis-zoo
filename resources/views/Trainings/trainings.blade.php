@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <h2>My Finished Trainings</h2>
+            <h2>My Trainings</h2>
         </div>
     </div>
     <div class="row">
@@ -29,7 +29,7 @@
         <div class="col-md-5">
             <div class="border" style="border: 1px solid lightgray; padding: 0 30px 30px; margin-top: 20px">
 
-                <h3 style="margin-bottom: 20px">create new training type</h3>
+                <h3 style="margin-bottom: 20px">create new training location</h3>
 
                 <a href="{{ route('trainings.create_type', ['type' => 'external']) }}" class="btn btn-info">
                     <span class="glyphicon glyphicon-plus"></span>
@@ -58,7 +58,7 @@
 
                     <div class="row" style="margin-top: 20px">
                         <div class="col-md-12">
-                            <a href="#" class="btn btn-info">
+                            <a href="{{ route('trainings.create', 'external')  }}" class="btn btn-info">
                                 <span class="glyphicon glyphicon-plus"></span>
                                 add new training
                             </a>
@@ -122,7 +122,7 @@
 
                     <div class="row" style="margin-top: 20px">
                         <div class="col-md-12">
-                            <a href="#" class="btn btn-info">
+                            <a href="{{ route('trainings.create', 'internal')  }}" class="btn btn-info">
                                 <span class="glyphicon glyphicon-plus"></span>
                                 add training
                             </a>
