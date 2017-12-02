@@ -34,17 +34,17 @@ Route::resource('/settings','SettingsController');
 /*
  * Trainings
  */
-Route::get('/Trainings/trainings/create/{id}', array('as' => 'trainings.create', 'uses' => 'TrainingsController@create'));
-Route::resource('/Trainings/trainings', 'TrainingsController',['except' => 'create']);
+
+// show dashboard for all trainings
+Route::get('/Trainings/trainings', 'TrainingsController@index')->name('trainings.index');
+
+Route::get('/Trainings/trainings/create/{id}', array('as' => 'trainingExternal.create', 'uses' => 'ExternalTrainingController@create'));
+Route::resource('/Trainings/trainings/trainingExternal', 'ExternalTrainingController', ['except' => 'create']);
+Route::resource('/Trainings/trainings/trainingInternal', 'TrainingsController');
 
 Route::get('/Trainings/trainings/trainingType/{type}', 'TrainingsController@trainingTypeCreate')->name('trainings.create_type');
 Route::post('/Trainings/trainings/trainingType/{type}/post', 'TrainingsController@trainingTypeStore')->name('trainings.store_type');
 
-//Route::resource('/Cleanings/cleanings', 'CleaningsController', ['except' => 'destroy']);
-//Route::post(
-//    '/Cleanings/cleanings/destroy/{id}/{user}/{count}',
-//    ['as' => 'cleanings.destroy', 'uses' => 'CleaningsController@destroy']
-//);
 Auth::routes();
 
 /*
@@ -54,10 +54,3 @@ Route::resource('/Cleanings/cleanings', 'CleaningsController');
 Route::delete(  '/Cleanings/cleanings/remove/{id}/{user}/{count}',
                 ['as' => 'cleanings.remove', 'uses' => 'CleaningsController@remove']);
 
-
-//Route::resource('/Cleanings/cleanings', 'CleaningsController', ['except' => 'destroy']);
-//Route::post(
-//    '/Cleanings/cleanings/destroy/{id}/{user}/{count}',
-//    ['as' => 'cleanings.destroy', 'uses' => 'CleaningsController@destroy']
-//);
-//Route::delete('/Cleanings/cleanings/{id}', 'CleaningsController@destroyAnimalType')->name('animals.destroy_type'); // update

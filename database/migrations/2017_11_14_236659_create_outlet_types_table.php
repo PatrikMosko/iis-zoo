@@ -26,10 +26,10 @@ class CreateOutletTypesTable extends Migration
             $table->integer('req_users_num')->unsigned();
 
             // foreign key pointing to trainings table
-            $table->integer('training_id')->unsigned();
+//            $table->integer('training_id')->unsigned();
+//            $table->foreign('training_id')
+//                ->references('id')->on('trainings')->ondelete('cascade');
 
-            $table->foreign('training_id')
-                ->references('id')->on('trainings')->ondelete('cascade');
 
             $table->timestamps();
         });

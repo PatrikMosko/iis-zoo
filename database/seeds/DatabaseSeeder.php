@@ -20,10 +20,10 @@ class DatabaseSeeder extends Seeder
         // seed external and internal tables
         $this->call(ExternalTrainingSeeder::class);
         $this->call(InternalTrainingSeeder::class);
-        // parent of internal and external tables
-        $this->call(TrainingTableSeeder::class);
         // create outlet types
         $this->call(OutletTypeSeeder::class);
+        // parent of internal ,external tables, users, outletType
+        $this->call(TrainingTableSeeder::class);
         // create outlet
         $this->call(OutletSeeder::class);
         // animal

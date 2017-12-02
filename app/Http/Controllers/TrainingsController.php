@@ -22,48 +22,50 @@ class TrainingsController extends Controller
         return view('Trainings/trainings', compact('all_external_trainings', 'all_internal_trainings'));
     }
 
-    public function create($type){
-        $outlet_types = Outlet::all()->pluck('name', 'id')->toArray();
-        $animal_types = AnimalType::all()->pluck('type_name', 'id')->toArray();
+//    public function trainingExternal
 
-        return view('Trainings/add_new', compact('outlet_types', 'animal_types', 'type'));
-    }
+//    public function create($type){
+//        $outlet_types = Outlet::all()->pluck('name', 'id')->toArray();
+//        $animal_types = AnimalType::all()->pluck('type_name', 'id')->toArray();
+//
+//        return view('Trainings/add_new', compact('outlet_types', 'animal_types', 'type'));
+//    }
 
-    public function store(Request $request){
-        request()->validate([
-            'name' => 'required',
-            'time' => 'required',
-            'date' => 'required',
-            'animal_types' => 'required',
-            'outlet_types' => 'required',
-        ]);
-        $params = $request->all();
-        $animal_type_id = current($params['animal_types']);
-        $outlet_type_id = current($params['outlet_types']);
-
-        $newTraining = new Training();
-        $newTraining->name = $params['name'];
-        $newTraining->time = '';
-        $newTraining->date = '';
-
-        if($animal_type_id != 'none') {
-//            $outlet_id = OutletType::all()->where('id', '=', $outlet_type)->first()->id;
-            //$animal_type_id = Animal::all()->where('id', '=', $animal_type);
-            $newTraining->animal_type_id = $animal_type_id;
-        } else {
-            $newTraining->animal_type_id = NULL;
-        }
-        $external1 = TrainingExternal::where('id', 1)->first(); // Exponea
-        $external1->trainings()->save($newTraining);
-
-        // todo error message
-        if($animal_type_id  == 'none' && $outlet_type_id == 'none')
-            dd("BOTH EMPTY KID!!!");
-
-        dd();
-        redirect()->route('trainings.index');
+//    public function store(Request $request){
+//        request()->validate([
+//            'name' => 'required',
+//            'time' => 'required',
+//            'date' => 'required',
+//            'animal_types' => 'required',
+//            'outlet_types' => 'required',
+//        ]);
+//        $params = $request->all();
+//        $animal_type_id = current($params['animal_types']);
+//        $outlet_type_id = current($params['outlet_types']);
+//
+//        $newTraining = new Training();
+//        $newTraining->name = $params['name'];
+//        $newTraining->time = '';
+//        $newTraining->date = '';
+//
+//        if($animal_type_id != 'none') {ph p
+////            $outlet_id = OutletType::all()->where('id', '=', $outlet_type)->first()->id;
+//            //$animal_type_id = Animal::all()->where('id', '=', $animal_type);
+//            $newTraining->animal_type_id = $animal_type_id;
+//        } else {
+//            $newTraining->animal_type_id = NULL;
+//        }
+//        $external1 = TrainingExternal::where('id', 1)->first(); // Exponea
+//        $external1->trainings()->save($newTraining);
+//
+//        // todo error message
+//        if($animal_type_id  == 'none' && $outlet_type_id == 'none')
+//            dd("BOTH EMPTY KID!!!");
+//
+//        dd();
+//        redirect()->route('trainings.index');
 //        return view('/home');
-    }
+//    }
 
     public function trainingTypeCreate($type) {
 

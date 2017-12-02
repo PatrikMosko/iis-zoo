@@ -58,18 +58,18 @@
 
                     <div class="row" style="margin-top: 20px">
                         <div class="col-md-12">
-                            <a href="{{ route('trainings.create', 'external')  }}" class="btn btn-info">
+                            <a href="{{ route('trainingExternal.create', $external_collection->id)  }}" class="btn btn-info">
                                 <span class="glyphicon glyphicon-plus"></span>
                                 add new training
                             </a>
-                            <a href="#" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-edit"></span>
-                                Edit
-                            </a>
-                            <a href="#" class="btn btn-danger">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                Remove
-                            </a>
+                            {{--<a href="#" class="btn btn-primary">--}}
+                                {{--<span class="glyphicon glyphicon-edit"></span>--}}
+                                {{--Edit--}}
+                            {{--</a>--}}
+                            {{--<a href="#" class="btn btn-danger">--}}
+                                {{--<span class="glyphicon glyphicon-remove"></span>--}}
+                                {{--Remove--}}
+                            {{--</a>--}}
                         </div>
                     </div>
                     <hr>
@@ -81,14 +81,15 @@
                             <br>
                             <p><strong>Name:</strong> <em> {{ $training_e->name }} </em></p>
                             <p><strong>Date:</strong> <em> {{ $training_e->date }} </em></p>
+                            {{--<p><strong>Users:</strong> <em> </em></p>--}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="btn btn-success" style="margin-top: 5px;">
-                                <span class="glyphicon glyphicon-ok"></span>
-                                Done
-                            </a>
+                            {{--<a href="#" class="btn btn-success" style="margin-top: 5px;">--}}
+                                {{--<span class="glyphicon glyphicon-ok"></span>--}}
+                                {{--Done--}}
+                            {{--</a>--}}
                             <a href="#" class="btn btn-primary" style="margin-top: 5px;">
                                 <span class="glyphicon glyphicon-edit"></span>
                                 Edit
@@ -122,7 +123,7 @@
 
                     <div class="row" style="margin-top: 20px">
                         <div class="col-md-12">
-                            <a href="{{ route('trainings.create', 'internal')  }}" class="btn btn-info">
+                            <a href="{{ route('trainingInternal.create')  }}" class="btn btn-info">
                                 <span class="glyphicon glyphicon-plus"></span>
                                 add training
                             </a>
@@ -149,10 +150,10 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="btn btn-success" style="margin-top: 5px;">
-                                <span class="glyphicon glyphicon-ok"></span>
-                                Done
-                            </a>
+                            {{--<a href="#" class="btn btn-success" style="margin-top: 5px;">--}}
+                                {{--<span class="glyphicon glyphicon-ok"></span>--}}
+                                {{--Done--}}
+                            {{--</a>--}}
                             <a href="#" class="btn btn-primary" style="margin-top: 5px;">
                                 <span class="glyphicon glyphicon-edit"></span>
                                 Edit

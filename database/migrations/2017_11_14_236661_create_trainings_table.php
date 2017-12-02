@@ -33,7 +33,10 @@ class CreateTrainingsTable extends Migration
             $table->foreign('animal_type_id')
                 ->references('id')->on('animal_types')->onDelete('cascade');
 
-
+            // foreign key pointing to animal_types table
+            $table->integer('outlet_type_id')->nullable()->unsigned();
+            $table->foreign('outlet_type_id')
+                ->references('id')->on('outlet_types')->onDelete('cascade');
 
             $table->timestamps();
         });
