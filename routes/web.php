@@ -11,7 +11,11 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::resource('/Feeding/feeding', 'FeedingController');
+Route::resource('/Feeding/feeding', 'FeedingController', ['except' => 'destroy']);
+Route::post(
+    '/Feeding/feeding/destroy/{id}',
+    ['as' => 'feeding.destroy', 'uses' => 'FeedingController@destroy']
+);
 /*
  * Animals
  */
@@ -42,7 +46,18 @@ Route::post('/Trainings/trainings/trainingType/{type}/post', 'TrainingsControlle
 //    ['as' => 'cleanings.destroy', 'uses' => 'CleaningsController@destroy']
 //);
 Auth::routes();
+
 /*
  * cleanings
  */
 Route::resource('/Cleanings/cleanings', 'CleaningsController');
+Route::delete(  '/Cleanings/cleanings/remove/{id}/{user}/{count}',
+                ['as' => 'cleanings.remove', 'uses' => 'CleaningsController@remove']);
+
+
+//Route::resource('/Cleanings/cleanings', 'CleaningsController', ['except' => 'destroy']);
+//Route::post(
+//    '/Cleanings/cleanings/destroy/{id}/{user}/{count}',
+//    ['as' => 'cleanings.destroy', 'uses' => 'CleaningsController@destroy']
+//);
+//Route::delete('/Cleanings/cleanings/{id}', 'CleaningsController@destroyAnimalType')->name('animals.destroy_type'); // update

@@ -33,23 +33,25 @@ class CleaningsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'cleaner' => 'required',
-            'date' => 'required',
+            'cleaner'       => 'required',
+            'date'          => 'required',
             'cleaning_time' => 'required',
-            'description' => 'nullable'
+            'description'   => 'nullable'
         ]);
 
         $params = $request->all();
 
         $new_cleaning = new Cleaning();
-        $new_cleaning->outlet_id = current($params['outlet']);
-        $new_cleaning->date = $params['date'];
+        $new_cleaning->outlet_id     = current($params['outlet']);
+        $new_cleaning->date          = $params['date'];
         $new_cleaning->cleaning_time = $params['cleaning_time'];
-        $new_cleaning->description = $params['description'];// ? $params['description']: '';
+        $new_cleaning->description   = $params['description'] ? $params['description']: '';
         $new_cleaning->save();
 
         // update animal pivot table
-        $new_cleaning->users()->attach(current($params['cleaner']));
+        foreach($params['cleaner'] as $cleaner) {
+            $new_cleaning->users()->attach($cleaner);
+        }
 
         return redirect()->route('cleanings.index');
     }
@@ -60,43 +62,63 @@ class CleaningsController extends Controller
         $users = User::all()->pluck('user_name','id');
         $outlets = Outlet::all()->pluck('name','id');
 
-        return view('Cleanings/edit', compact('cleaning', 'users', 'outlets'));
+        $users_check = array();
+
+        $collections = Cleaning::with('users')->where('id', $id)->first()['users'];
+        foreach ($collections as $collection){
+            $users_check[]= $collection['id'];
+        }
+
+        return view('Cleanings/edit', compact('cleaning', 'users', 'outlets', 'users_check'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'cleaner' => 'required',
-            'date' => 'required',
-            'time' => 'required',
-            'description' => 'nullable'
+            'cleaner'       => 'required',
+            'date'          => 'required',
+            'cleaning_time' => 'required',
+            'description'   => 'nullable'
         ]);
 
         $params = $request->all();
 
-        // todo update date
-        // todo saved values into form input
-
         $cleaning = Cleaning::find($id);
-        $old_user_id = $cleaning->user_id;
 
-        $cleaning->date = $params['date'];
+        //$collections = Cleaning::with('users')->where('id', $id)->first()['users'];
+
+        $cleaning->date          = $params['date'];
         $cleaning->cleaning_time = $params['cleaning_time'];
-        $cleaning->outlet_id = $params['outlet'][0];
-        $cleaning->description = $params['description'];
+        $cleaning->outlet_id     = $params['outlet'][0];
+        $cleaning->description   = $params['description'];
         $cleaning->save();
 
-        $cleaning->users()->updateExistingPivot($old_user_id, ['user_id' => $params['cleaner'][0]], false);
+        $cleaning->users()->detach();
+        foreach($params['cleaner'] as $cleaner) {
+            $cleaning->users()->attach($cleaner);
+        }
 
         return redirect()->route('cleanings.index')
             ->with(['success','Cleaning updated successfully!']);
     }
 
-    public function destroy($id)
+    public function remove($id, $user, $count)
     {
         $cleaning = Cleaning::find($id);
+        if ($count == 1)
+            $cleaning->delete();
+
+        $cleaning->users()->detach($user);
+
+        return redirect()->route('cleanings.index')
+            ->with(['success','Cleaning deleted successfully!']);
+    }
+
+    public function destroy($id)
+    {
+
+        $cleaning = Cleaning::find($id);
         $cleaning->delete();
-        // detach cleanings from pivot table
         $cleaning->users()->detach();
 
         return redirect()->route('cleanings.index')
