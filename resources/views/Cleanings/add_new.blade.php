@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <h1 class="text-center">Add new cleaning</h1>
 
     {{ Form::open(array('route' => 'cleanings.store')) }}
@@ -31,8 +32,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <strong>Cleaner</strong>
-                {!! Form::select('cleaner[]', $users , null, ['class' => 'form-control']) !!}
+                <strong>Cleaners</strong>
+                {!! Form::select('cleaner[]', $users , null, ['class' => 'selectpicker',
+                                                              'multiple' => '',
+                                                              'data-live-search' => 'true',
+                                                              'data-width' => '100%']) !!}
             </div>
             <div class="form-group">
                 <strong>Outlet</strong>
@@ -42,6 +46,16 @@
                 <strong>Description</strong>
                 {!! Form::text('description', null, ['placeholder' => 'please enter description...', 'class' => 'form-control']) !!}
             </div>
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -53,5 +67,5 @@
 
     {!! Form::close() !!}
 
-
 @endsection
+
