@@ -43,7 +43,7 @@
                     </li>
                     {{--@endif--}}
                     <li>
-                        <a href="#">User Settings</a>
+                        <a href="{{ url('/settings/settingsUser') }}">User Settings</a>
                     </li>
                 </ul>
         @endauth

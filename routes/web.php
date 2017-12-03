@@ -24,6 +24,10 @@ Route::resource('/Animals/animals', 'AnimalsController');
 /*
  * settings
  */
+// settings for user
+Route::get  ('/settings/settingsUser'     , 'SettingsController@userIndex' )->name('settingsUser.index' ); //edit
+Route::patch('/settings/settingsUser/{id}', 'SettingsController@userUpdate')->name('settingsUser.update'); //update
+// admin
 Route::resource('/settings','SettingsController');
 
 /*
