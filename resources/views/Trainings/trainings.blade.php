@@ -76,12 +76,19 @@
                     <h3 style="margin-top: 30px;">Available Trainings</h3>
 
                 @foreach ($external_collection->trainings as $training_e)
+                    @if(!is_null($training_e))
                     <div class="row">
                         <div class="col-md-12">
                             <br>
                             <p><strong>Name:</strong> <em> {{ $training_e->name }} </em></p>
                             <p><strong>Date:</strong> <em> {{ $training_e->date }} </em></p>
-                            {{--<p><strong>Users:</strong> <em> </em></p>--}}
+                            <p><strong>Time:</strong> <em> {{ $training_e->time }} </em></p>
+                            @if($training_e->outlet_types['name'])
+                                <p><strong>For outlet type:</strong> <em> {{ $training_e->outlet_types['name']}} </em></p>
+                            @endif
+                            @if($training_e->animal_types['type_name'])
+                                <p><strong>For animal type:</strong> <em> {{ $training_e->animal_types['type_name']}} </em></p>
+                            @endif
                         </div>
                     </div>
                     <div class="row">
@@ -90,17 +97,21 @@
                                 {{--<span class="glyphicon glyphicon-ok"></span>--}}
                                 {{--Done--}}
                             {{--</a>--}}
-                            <a href="#" class="btn btn-primary" style="margin-top: 5px;">
-                                <span class="glyphicon glyphicon-edit"></span>
-                                Edit
-                            </a>
-                            <a href="#" class="btn btn-danger" style="margin-top: 5px;">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                Remove
-                            </a>
+                            {{--<a href="#" class="btn btn-primary" style="margin-top: 5px;">--}}
+                                {{--<span class="glyphicon glyphicon-edit"></span>--}}
+                                {{--Edit--}}
+                            {{--</a>--}}
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['trainingExternal.destroy', $training_e->id], 'style'=>'display:inline',]) !!}
+                                {{Form::button('<span class="glyphicon glyphicon-remove"></span> Delete',array('type'  => 'submit', 'class' => 'btn btn-danger'))}}
+                            {!! Form::close() !!}
+
+                            {!! Form::open(['method' => 'GET', 'route' => ['trainingExternal.edit', $training_e->id], 'style'=>'display:inline']) !!}
+                                {{ Form::button('<span class="glyphicon glyphicon-edit"></span> Edit', array('type'  => 'submit','class' => 'btn btn-primary'))}}
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 <hr/>
+                    @endif
                 @endforeach
                 </div>
             @endforeach
@@ -127,14 +138,14 @@
                                 <span class="glyphicon glyphicon-plus"></span>
                                 add training
                             </a>
-                            <a href="#" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-edit"></span>
-                                Edit
-                            </a>
-                            <a href="#" class="btn btn-danger">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                Remove
-                            </a>
+                            {{--<a href="#" class="btn btn-primary">--}}
+                                {{--<span class="glyphicon glyphicon-edit"></span>--}}
+                                {{--Edit--}}
+                            {{--</a>--}}
+                            {{--<a href="#" class="btn btn-danger">--}}
+                                {{--<span class="glyphicon glyphicon-remove"></span>--}}
+                                {{--Remove--}}
+                            {{--</a>--}}
                         </div>
                     </div>
                     <hr/>
@@ -144,8 +155,8 @@
                     <br/>
                     <div class="row">
                         <div class="col-md-12">
-                            <p><strong>Name:</strong> <em>{{ $training_e->name }}</em></p>
-                            <p><strong>Date:</strong> <em>{{ $training_e->date }}</em></p>
+                            <p><strong>Name:</strong> <em>{{ $training_i->name }}</em></p>
+                            <p><strong>Date:</strong> <em>{{ $training_i->date }}</em></p>
                         </div>
                     </div>
                     <div class="row">
