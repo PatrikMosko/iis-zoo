@@ -23,5 +23,10 @@ class OutletSeeder extends Seeder
         $outlet2->name = 'platinum';
         $outlet2->outlet_type_id = OutletType::where('id', 2)->first()->id;
         $outlet2->save();
+
+        $outlet3 = new Outlet();
+        $outlet3->name = 'cats cage';
+        $outlet3->outlet_type_id = OutletType::where('id', 1)->first()->id;
+        $outlet3->save();
     }
 }

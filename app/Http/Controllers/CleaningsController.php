@@ -82,10 +82,7 @@ class CleaningsController extends Controller
         ]);
 
         $params = $request->all();
-
         $cleaning = Cleaning::find($id);
-
-        //$collections = Cleaning::with('users')->where('id', $id)->first()['users'];
 
         $cleaning->date          = $params['date'];
         $cleaning->cleaning_time = $params['cleaning_time'];

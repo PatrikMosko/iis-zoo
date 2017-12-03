@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>animals</h2>
+
+    <h2>animals</h2><br>
 
     <!-- Table -->
     <table class="table table-bordered">

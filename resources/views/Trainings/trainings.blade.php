@@ -182,4 +182,5 @@
             @endforeach
         </div>
     </div>
+    <hr style="height:30px; visibility:hidden;" />
 @endsection

@@ -11,11 +11,6 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::resource('/Feeding/feeding', 'FeedingController', ['except' => 'destroy']);
-Route::post(
-    '/Feeding/feeding/destroy/{id}',
-    ['as' => 'feeding.destroy', 'uses' => 'FeedingController@destroy']
-);
 /*
  * Animals
  */
@@ -54,3 +49,10 @@ Route::resource('/Cleanings/cleanings', 'CleaningsController');
 Route::delete(  '/Cleanings/cleanings/remove/{id}/{user}/{count}',
                 ['as' => 'cleanings.remove', 'uses' => 'CleaningsController@remove']);
 
+/*
+ * feedings
+ */
+Route::resource('/Feeding/feeding', 'FeedingController');
+Route::delete(  '/Feeding/feeding/remove/{id}/{animal}/{count}',
+                ['as' => 'feeding.remove', 'uses' => 'FeedingController@remove']
+);

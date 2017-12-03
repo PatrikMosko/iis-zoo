@@ -2,10 +2,10 @@
     <div class="col-md-3"></div>
     <div class="col-md-6">
         <div class="form-group">
-            <strong>Date&time:</strong>
-            <div class="input-group date" id="datetimepicker1">
-                {!!Form::text('date_time', $feeding->date_time,
-                    array('class' => 'form-control', 'placeholder' => 'enter date and time'))
+            <strong>Date</strong>
+            <div class="input-group date" id="date_picker">
+                {!!Form::text('date', $feeding->date,
+                    array('class' => 'form-control', 'placeholder' => 'enter date of cleaning...'))
                 !!}
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
@@ -13,13 +13,20 @@
             </div>
         </div>
         <div class="form-group">
-            <strong>Handler:</strong>
-            {!! Form::select('handler', $all_users, $actual_user, ['class' => 'form-control']) !!}
+            <strong>Time</strong>
+            <div class="input-group date" id="time_picker">
+                {!!Form::text('time', $feeding->time,
+                    array('class' => 'form-control', 'placeholder' => 'enter expected cleaning time...'))
+                !!}
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
         </div>
-        {{--<div class="form-group">--}}
-            {{--<strong>Outlet:</strong>--}}
-            {{--{!! Form::text('outlet', , ['class' => 'form-control']) !!}--}}
-        {{--</div>--}}
+        <div class="form-group">
+            <strong>Handler:</strong>
+            {!! Form::select('feeder[]', $users, $actual_user, ['class' => 'form-control']) !!}
+        </div>
         <strong>Amount of food</strong>
         <div class="row">
             <div class="col-md-9">
@@ -34,14 +41,26 @@
             </div>
         </div>
         <div class="form-group">
-            <strong>Animal</strong>
-            {!! Form::select('animal', $all_animal_names, null, ['class' => 'form-control']) !!}
-            {{--todo selected animal rip--}}
+            <strong>Animals</strong>
+            {!! Form::select('animals[]', $animals , null, ['class' => 'selectpicker',
+                                                          'data-live-search' => 'true',
+                                                          'multiple' => '',
+                                                          'data-width' => '100%']) !!}
         </div>
         <div class="form-group">
             <strong>Description</strong>
             {!! Form::text('description', null, ['placeholder' => 'please enter description...', 'class' => 'form-control']) !!}
         </div>
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <button type="submit" class="btn btn-primary">Submit</button>

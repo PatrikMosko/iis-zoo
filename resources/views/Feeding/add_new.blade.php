@@ -9,10 +9,10 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <div class="form-group">
-                <strong>Date&time:</strong>
-                <div class='input-group date' id='datetimepicker1'>
-                    {!!Form::text('date_time', null,
-                        array('class' => 'form-control', 'placeholder' => 'please enter date and time...'))
+                <strong>Date</strong>
+                <div class="input-group date" id="date_picker">
+                    {!!Form::text('date', null,
+                        array('class' => 'form-control', 'placeholder' => 'enter date of cleaning...'))
                     !!}
                     <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
@@ -20,13 +20,20 @@
                 </div>
             </div>
             <div class="form-group">
-                <strong>Handler:</strong>
-                {!! Form::select('handler[]', $users , null, ['class' => 'form-control']) !!}
+                <strong>Time</strong>
+                <div class="input-group date" id="time_picker">
+                    {!!Form::text('time', null,
+                        array('class' => 'form-control', 'placeholder' => 'enter expected cleaning time...'))
+                    !!}
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+                </div>
             </div>
-            {{--<div class="form-group">--}}
-            {{--<strong>Outlet:</strong>--}}
-            {{--{!! Form::text('outlet', , ['class' => 'form-control']) !!}--}}
-            {{--</div>--}}
+            <div class="form-group">
+                <strong>Feeder:</strong>
+                {!! Form::select('feeder[]', $users, null, ['class' => 'form-control']) !!}
+            </div>
             <strong>Amount of food</strong>
             <div class="row">
                 <div class="col-md-9">
@@ -36,18 +43,31 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::select('unit', ['g' => 'g', 'kg' => 'kg'], null , ['class' => 'form-control']) !!}
+                        {!! Form::select('unit', ['mg' => 'mg','g' => 'g','kg' => 'kg'], null , ['class' => 'form-control']) !!}
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <strong>Animal</strong>
-                {!! Form::select('animal[]', $animals, null, ['class' => 'form-control']) !!}
+                <strong>Animals</strong>
+                {!! Form::select('animals[]', $animals , null, ['class' => 'selectpicker',
+                                                              'data-live-search' => 'true',
+                                                              'multiple' => '',
+                                                              'data-width' => '100%']) !!}
             </div>
             <div class="form-group">
                 <strong>Description</strong>
                 {!! Form::text('description', null, ['placeholder' => 'please enter description...', 'class' => 'form-control']) !!}
             </div>
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>

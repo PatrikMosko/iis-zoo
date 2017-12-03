@@ -1,6 +1,6 @@
 <h2>
     animal types
-</h2>
+</h2><br>
 <!-- Table -->
 <table class="table table-bordered">
     <tr>
