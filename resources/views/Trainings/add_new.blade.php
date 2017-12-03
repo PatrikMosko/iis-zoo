@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="row text-center">
+        <div class="col-md-12">
+            <h1>add new </h1>
+        </div>
+    </div>
 
-    <h1 class="text-center">Add new cleaning</h1>
-
-    {{ Form::open(array('route' => 'cleanings.store')) }}
-
+    {{ Form::open(array('route' => ['trainings.store', 'z'=>'waaa'])) }}
+    {{--<h1>   wiioopp = {{$type}}</h1>--}}
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
@@ -23,7 +26,7 @@
             <div class="form-group">
                 <strong>Time</strong>
                 <div class="input-group date" id="time_picker">
-                    {!!Form::text('cleaning_time', null,
+                    {!!Form::text('time', null,
                         array('class' => 'form-control', 'placeholder' => 'enter expected cleaning time...'))
                     !!}
                     <span class="input-group-addon">
@@ -32,19 +35,16 @@
                 </div>
             </div>
             <div class="form-group">
-                <strong>Cleaners</strong>
-                {!! Form::select('cleaner[]', $users , null, ['class' => 'selectpicker',
-                                                              'multiple' => '',
-                                                              'data-live-search' => 'true',
-                                                              'data-width' => '100%']) !!}
+                <strong>Name</strong>
+                {!! Form::text('name', null, ['placeholder' => 'please enter address...', 'class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                <strong>Outlet</strong>
-                {!! Form::select('outlet[]', $outlets, null, ['class' => 'form-control']) !!}
+                <strong>Outlet type</strong>
+                {!! Form::select('outlet_types[]', $outlet_types + ['none' => 'none'] , 'none', ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                <strong>Description</strong>
-                {!! Form::text('description', null, ['placeholder' => 'please enter description...', 'class' => 'form-control']) !!}
+                <strong>Animal type</strong>
+                {!! Form::select('animal_types[]', $animal_types + ['none' => 'none'] , 'none', ['class' => 'form-control']) !!}
             </div>
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
@@ -61,11 +61,11 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
+
     <div class="row">
-        <a href="{{ route('cleanings.index')  }}" class="btn btn-default pull-right">back</a>
+        <a href="{{ route('trainings.index')  }}" class="btn btn-default pull-right">back</a>
     </div>
 
     {!! Form::close() !!}
 
 @endsection
-

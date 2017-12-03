@@ -16,7 +16,7 @@ class Training extends Model
 
     public function outlet_types()
     {
-        return $this->hasOne('App\OutletType', 'training_id');
+        return $this->belongsTo('App\OutletType', 'outlet_type_id');
     }
 
     public function animal_types()

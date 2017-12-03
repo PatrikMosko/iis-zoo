@@ -3,7 +3,7 @@
     <div class="col-md-6">
         <div class="form-group">
             <strong>Date&time:</strong>
-            <div class='input-group date' id='datetimepicker1'>
+            <div class="input-group date" id="datetimepicker1">
                 {!!Form::text('date_time', $feeding->date_time,
                     array('class' => 'form-control', 'placeholder' => 'enter date and time'))
                 !!}

@@ -14,6 +14,13 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset("bower/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css")}}"/>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -25,46 +32,29 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/locale/sk.js"></script>
+
 
     {{--http://eonasdan.github.io/bootstrap-datetimepicker/--}}
     <script type="text/javascript" src="{{asset("bower/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")}}"></script>
 
+
+
     <script type="text/javascript">
         $(function () {
             //http://eonasdan.github.io/bootstrap-datetimepicker/
-            $('#datetimepicker1').datetimepicker({
-                sideBySide: true,
-                locale: 'sk', // sk or en
-                //http://momentjs.com/docs/#/displaying/format/
-                format: 'YYYY-MM-DD HH:mm:ss'
-            });
-            $('#cleaning_date_picker').datetimepicker({
+            $('#date_picker').datetimepicker({
                 locale: 'sk',
                 format: 'YYYY-MM-DD'
             });
-            $('#cleaning_time_picker').datetimepicker({
-                locale: 'sk',
-                format: 'HH:mm:ss'
-            });
-            $('#just_date').datetimepicker({
-                sideBySide: true,
-                locale: 'en', // sk or en
-                format: 'YYYY-MM-DD HH:mm:ss'
-            });
-            $('#cleaning_date_picker2').datetimepicker({
-                locale: 'sk',
-                format: 'YYYY-MM-DD'
-            });
-            $('#cleaning_time_picker2').datetimepicker({
+            $('#time_picker').datetimepicker({
                 locale: 'sk',
                 format: 'HH:mm:ss'
             });
         });
     </script>
+
 
 </body>
 </html>

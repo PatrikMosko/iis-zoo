@@ -18,7 +18,6 @@ class CreateInternalTrainingsTable extends Migration
 
             $table->increments('id');
             $table->string('place');
-
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateInternalTrainingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('internal_trainings');
+        Schema::dropIfExists('training_internals');
     }
 }
