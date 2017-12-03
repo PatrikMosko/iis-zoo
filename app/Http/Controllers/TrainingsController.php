@@ -68,7 +68,6 @@ class TrainingsController extends Controller
 //    }
 
     public function trainingTypeCreate($type) {
-
         if ($type == 'internal') {
             return view('Trainings/TrainingType/Internal/add_new');
         } else if ($type == 'external') {
@@ -80,10 +79,20 @@ class TrainingsController extends Controller
         $params = $request->all();
 
         if($type == 'internal') {
+
+            $request->validate([
+                'place' => 'required',
+            ]);
             $newInternalType = new TrainingInternal();
             $newInternalType->place = $params['place'];
             $newInternalType->save();
+
         } else if($type == 'external') {
+
+            $request->validate([
+                'name' => 'required',
+                'address' => 'required',
+            ]);
             $newExternalType = new TrainingExternal();
             $newExternalType->company_name = $params['name'];
             $newExternalType->company_address = $params['address'];

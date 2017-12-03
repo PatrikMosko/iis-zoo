@@ -140,18 +140,10 @@
                     <div class="row" style="margin-top: 20px">
                         @if($is_admin)
                         <div class="col-md-12">
-                            <a href="{{ route('trainingInternal.create')  }}" class="btn btn-info">
+                            <a href="{{ route('trainingInternal.create', $internal_collection->id) }}" class="btn btn-info">
                                 <span class="glyphicon glyphicon-plus"></span>
                                 add training
                             </a>
-                            {{--<a href="#" class="btn btn-primary">--}}
-                                {{--<span class="glyphicon glyphicon-edit"></span>--}}
-                                {{--Edit--}}
-                            {{--</a>--}}
-                            {{--<a href="#" class="btn btn-danger">--}}
-                                {{--<span class="glyphicon glyphicon-remove"></span>--}}
-                                {{--Remove--}}
-                            {{--</a>--}}
                         </div>
                         @endif
                     </div>
@@ -164,23 +156,24 @@
                         <div class="col-md-12">
                             <p><strong>Name:</strong> <em>{{ $training_i->name }}</em></p>
                             <p><strong>Date:</strong> <em>{{ $training_i->date }}</em></p>
-                        </div>
+                            <p><strong>Time:</strong> <em>{{ $training_i->time }}</em></p>
+                            @if($training_i->outlet_types['name'])
+                                <p><strong>For outlet type:</strong> <em> {{ $training_i->outlet_types['name']}} </em></p>
+                            @endif
+                            @if($training_i->animal_types['type_name'])
+                                <p><strong>For animal type:</strong> <em> {{ $training_i->animal_types['type_name']}} </em></p>
+                            @endif                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            {{--<a href="#" class="btn btn-success" style="margin-top: 5px;">--}}
-                                {{--<span class="glyphicon glyphicon-ok"></span>--}}
-                                {{--Done--}}
-                            {{--</a>--}}
                             @if($is_admin)
-                            <a href="#" class="btn btn-primary" style="margin-top: 5px;">
+                            <a href="{{ route('trainingInternal.edit', $training_i->id) }}" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-edit"></span>
                                 Edit
                             </a>
-                            <a href="#" class="btn btn-danger" style="margin-top: 5px;">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                Remove
-                            </a>
+                                {!! Form::open(['method' => 'DELETE', 'route' => ['trainingInternal.destroy', $training_i->id], 'style'=>'display:inline',]) !!}
+                                    {{Form::button('<span class="glyphicon glyphicon-remove"></span> Delete',array('type'  => 'submit', 'class' => 'btn btn-danger'))}}
+                                {!! Form::close() !!}
                             @endif
                         </div>
                     </div>

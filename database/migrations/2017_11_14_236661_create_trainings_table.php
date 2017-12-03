@@ -20,7 +20,7 @@ class CreateTrainingsTable extends Migration
 
             // date when particular training was held
             $table->date('date');
-            $table->date('time');
+            $table->time('time');
             // Name of the course/training
             $table->string('name');
             // todo

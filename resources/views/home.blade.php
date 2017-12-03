@@ -37,10 +37,6 @@
 
             </div>
         </div>
-        {{$is_admin}}
-        @if($is_admin)
-            <img src="https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/10882242_10202250395416157_3323444183679021913_n.jpg?oh=c847062436331a3f94c52290f64acaec&oe=5A9DCB7C">
-        @endif
     </div>
 </div>
 

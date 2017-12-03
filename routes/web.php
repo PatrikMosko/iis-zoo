@@ -37,12 +37,13 @@ Route::resource('/settings','SettingsController');
 // show dashboard for all trainings
 Route::get('/Trainings/trainings', 'TrainingsController@index')->name('trainings.index');
 
-Route::get('/Trainings/trainings/create/{id}', array('as' => 'trainingExternal.create', 'uses' => 'ExternalTrainingController@create'));
+Route::get('/Trainings/trainings/createExternal/{id}', array('as' => 'trainingExternal.create', 'uses' => 'ExternalTrainingController@create'));
+Route::get('/Trainings/trainings/createInternal/{id}', array('as' => 'trainingInternal.create', 'uses' => 'InternalTrainingController@create'));
 Route::resource('/Trainings/trainings/trainingExternal', 'ExternalTrainingController', ['except' => 'create']);
-Route::resource('/Trainings/trainings/trainingInternal', 'TrainingsController');
+Route::resource('/Trainings/trainings/trainingInternal', 'InternalTrainingController', ['except' => 'create']);
 
-Route::get('/Trainings/trainings/trainingType/{type}', 'TrainingsController@trainingTypeCreate')->name('trainings.create_type');
-Route::post('/Trainings/trainings/trainingType/{type}/post', 'TrainingsController@trainingTypeStore')->name('trainings.store_type');
+Route::get('/Trainings/trainings/trainingType/{type}'      , 'TrainingsController@trainingTypeCreate')->name('trainings.create_type');
+Route::post('/Trainings/trainings/trainingType/{type}/post', 'TrainingsController@trainingTypeStore' )->name('trainings.store_type' );
 
 Auth::routes();
 

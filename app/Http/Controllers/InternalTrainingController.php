@@ -3,18 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\AnimalType;
-use App\Cleaning;
 use App\Outlet;
 use App\OutletType;
 use App\Training;
-use App\TrainingExternal;
+use App\TrainingInternal;
 use App\User;
 use Illuminate\Http\Request;
 
-class ExternalTrainingController extends Controller
+class InternalTrainingController extends Controller
 {
     public $create_type_id;
-    public $edit_type_id;
 
     public function __construct()
     {
@@ -35,11 +33,10 @@ class ExternalTrainingController extends Controller
         $animal_types = AnimalType::all()->pluck('type_name', 'id')->toArray();
         $users = User::all()->pluck('user_name','id');
 
-        return view('Trainings/TrainingExternal/add_new',compact('animal_types', 'outlet_types','users'));
+        return view('Trainings/TrainingInternal/add_new',compact('animal_types', 'outlet_types','users'));
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $request->validate([
             'name'         => 'required',
             'time'         => 'required',
@@ -73,8 +70,8 @@ class ExternalTrainingController extends Controller
         if($animal_type_id == 'none' && $outlet_type_id == 'none')
             dd("both empty!");
 
-        $external1 = TrainingExternal::where('id',  $request->session()->get('create_type_id'))->first(); // Exponea
-        $external1->trainings()->save($newTraining);
+        $internal = TrainingInternal::where('id',  $request->session()->get('create_type_id'))->first();
+        $internal->trainings()->save($newTraining);
 
 
         // update training user pivot
@@ -98,8 +95,8 @@ class ExternalTrainingController extends Controller
             $users_check[]= $collection['id'];
         }
 
-        return view('Trainings/TrainingExternal/edit',compact('outlet_types', 'animal_types',
-                                                                  'users', 'training', 'users_check'));
+        return view('Trainings/TrainingInternal/edit',compact('outlet_types', 'animal_types',
+            'users', 'training', 'users_check'));
     }
 
     public function update(Request $request, $id)
