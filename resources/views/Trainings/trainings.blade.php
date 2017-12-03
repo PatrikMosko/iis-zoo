@@ -24,7 +24,7 @@
             <h2>All available Trainings</h2>
         </div>
     </div>
-
+    @if($is_admin)
     <div class="row text-center">
         <div class="col-md-5">
             <div class="border" style="border: 1px solid lightgray; padding: 0 30px 30px; margin-top: 20px">
@@ -42,6 +42,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     <div class="row">
         <div class="col-md-6">
@@ -57,6 +58,7 @@
                     <em>{{$external_collection->company_address}}</em>
 
                     <div class="row" style="margin-top: 20px">
+                        @if($is_admin)
                         <div class="col-md-12">
                             <a href="{{ route('trainingExternal.create', $external_collection->id)  }}" class="btn btn-info">
                                 <span class="glyphicon glyphicon-plus"></span>
@@ -71,6 +73,7 @@
                                 {{--Remove--}}
                             {{--</a>--}}
                         </div>
+                        @endif
                     </div>
                     <hr>
                     <h3 style="margin-top: 30px;">Available Trainings</h3>
@@ -101,6 +104,7 @@
                                 {{--<span class="glyphicon glyphicon-edit"></span>--}}
                                 {{--Edit--}}
                             {{--</a>--}}
+                            @if($is_admin)
                             {!! Form::open(['method' => 'DELETE', 'route' => ['trainingExternal.destroy', $training_e->id], 'style'=>'display:inline',]) !!}
                                 {{Form::button('<span class="glyphicon glyphicon-remove"></span> Delete',array('type'  => 'submit', 'class' => 'btn btn-danger'))}}
                             {!! Form::close() !!}
@@ -108,6 +112,7 @@
                             {!! Form::open(['method' => 'GET', 'route' => ['trainingExternal.edit', $training_e->id], 'style'=>'display:inline']) !!}
                                 {{ Form::button('<span class="glyphicon glyphicon-edit"></span> Edit', array('type'  => 'submit','class' => 'btn btn-primary'))}}
                             {!! Form::close() !!}
+                            @endif
                         </div>
                     </div>
                 <hr/>
@@ -133,6 +138,7 @@
                     <em>{{$internal_collection->place}}</em>
 
                     <div class="row" style="margin-top: 20px">
+                        @if($is_admin)
                         <div class="col-md-12">
                             <a href="{{ route('trainingInternal.create')  }}" class="btn btn-info">
                                 <span class="glyphicon glyphicon-plus"></span>
@@ -147,6 +153,7 @@
                                 {{--Remove--}}
                             {{--</a>--}}
                         </div>
+                        @endif
                     </div>
                     <hr/>
                     <h3 style="margin-top: 30px;">Available Trainings</h3>
@@ -165,6 +172,7 @@
                                 {{--<span class="glyphicon glyphicon-ok"></span>--}}
                                 {{--Done--}}
                             {{--</a>--}}
+                            @if($is_admin)
                             <a href="#" class="btn btn-primary" style="margin-top: 5px;">
                                 <span class="glyphicon glyphicon-edit"></span>
                                 Edit
@@ -173,6 +181,7 @@
                                 <span class="glyphicon glyphicon-remove"></span>
                                 Remove
                             </a>
+                            @endif
                         </div>
                     </div>
                     <hr/>

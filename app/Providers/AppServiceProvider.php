@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\User;
 use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 //use Route;
 use View;
+use Auth;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -19,14 +21,24 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
-        //
-        Schema::defaultStringLength(191);
-//        dd($request->user());
-        // Using view composer to set following variables globally
-//        view()->composer('*',function($view) {
-//
-//            //->user()->hasRole('admin'));
-//        });
+
+        view()->composer(
+            ['layouts.app',
+             'home',
+             'Feeding.*',
+             'Cleanings.*',
+             'Animals.*',
+             'Settings.*',
+             'Trainings.*',
+            ],
+            function($view) {
+                if(auth()->user() != null) {
+                    $is_admin = (User::find(auth()->user()->id))->roles()->first()->id == 1 ? false : true;
+
+                    $view->with('is_admin', $is_admin);
+                }
+            }
+        );
     }
 
     /**
@@ -36,20 +48,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-        // provide variable isUserAdmin to all templates
-//        View::composer('*', function($view){
-//            $userReq = Request::create('/', 'GET');
-//            //dd($userReq);
-            //$instance = Route::dispatch($userReq);
-//
-//            $userReq1 = Request::create('/isUserAdmin', 'GET');
-//            dd(Route::dispatch($userReq1));
-////            $instance = json_decode(Route::c($userReq)->getContent());
-////            dd($instance);
-////            dd($instance);
-//            $view->with('isUserAdmin', $instance);
-//        });
 
     }
 }

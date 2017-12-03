@@ -6,6 +6,7 @@ use App\User;
 use App\Role;
 use Illuminate\Http\Request;
 use Auth;
+use App\Providers\AppServiceProvider;
 //use Illuminate\Support\Facades\Auth;
 
 class SettingsController extends Controller

@@ -11,12 +11,14 @@
         <div class="col-md-6">
             <h2>cleanings</h2>
         </div>
+        @if($is_admin)
         <div class="col-md-6 text-right">
             <a href="{{ route('cleanings.create')  }}" class="btn btn-info">
                 <span class="glyphicon glyphicon-plus"></span>
                 Add new
             </a>
         </div>
+        @endif
     </div>
     <div class="row">
     @foreach($cleanings as $cleaning)
@@ -43,6 +45,7 @@
                     {{ $cleaning->description }}
                 </div>
             </div>
+            @if($is_admin)
             <hr>
             <div class="row">
                 @foreach($cleaning->users as $user)
@@ -81,6 +84,7 @@
                     {!! Form::close() !!}
                 </div>
             </div>
+            @endif
         </div>
     </div>
     @endforeach

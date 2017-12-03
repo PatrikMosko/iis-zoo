@@ -59,5 +59,5 @@
 
     {!! Form::close() !!}
 
-    
+
 @endsection

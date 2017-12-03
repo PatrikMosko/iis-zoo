@@ -36,15 +36,16 @@
                     <li>
                         <a href="{{ url('Trainings/trainings')  }}">Education trainings</a>
                     </li>
-                    {{--{{ $isUserAdmin  }}--}}
-                    {{--@if($isUserAdmin)--}}
+                    @if($is_admin)
                     <li>
                         <a href="{{ url('/settings') }}">Admin Settings</a>
                     </li>
-                    {{--@endif--}}
+                    @endif
+                    @if(!$is_admin)
                     <li>
                         <a href="{{ url('/settings/settingsUser') }}">User Settings</a>
                     </li>
+                    @endif
                 </ul>
         @endauth
 
@@ -57,7 +58,13 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->user_name }} <span class="caret"></span>
+                                {{ Auth::user()->user_name }}
+                                @if($is_admin)
+                                    (admin)
+                                @else
+                                    (user)
+                                @endif
+                                <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
