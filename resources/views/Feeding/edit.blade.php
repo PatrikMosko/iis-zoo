@@ -7,17 +7,6 @@
         </div>
     </div>
 
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     {!! Form::model($feeding, ['method' => 'PATCH','route' => ['feeding.update', $feeding->id]]) !!}
 
     {{csrf_field()}}
@@ -32,6 +21,10 @@
             <a class="btn btn-default" href="{{ route('feeding.index') }}"> Back </a>
         </div>
     </div>
-
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.selectpicker').selectpicker('val', {{ json_encode($animals_check) }} );
+        });
+    </script>
 
 @endsection

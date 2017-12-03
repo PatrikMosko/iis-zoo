@@ -13,7 +13,7 @@ class AnimalTypeTableSeeder extends Seeder
     public function run()
     {
         $type1 = new AnimalType();
-        $type1->type_name = 'falidae';
+        $type1->type_name = 'felidae';
         $type1->description = 'some description 1';
         $type1->save();
 

@@ -1,60 +1,96 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>feeding</h2>
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
     @endif
-    <!-- Table -->
-    <table class="table table-bordered">
-        <tr>
-            <th>Date&time</th>
-            <th>Handler</th>
-            <th>Outlet</th>
-            <th>Amount of food</th>
-            <th>Animal</th>
-            <th>Decription</th>
-            <th>Action</th>
-        </tr>
-        @foreach($all_feedings as $feeding)
-            @foreach($feeding->animals as $animal)
-            <tr>
-                <td>
-                    {{ $feeding->date_time }}
-                </td>
-                <td>
-                    <a href="{{ route('settings.show', $feeding->users->id) }}"> {{ $feeding->users->user_name }} </a>
-                </td>
-                <td>
-                    {{ $animal->outlet->name }}
-                </td>
-                <td>
-                    {{ $feeding->amount_of_food }} {{ $feeding->unit }}
-                </td>
-                <td>
-                    <a href="{{ route('animals.show', $animal->id) }}"> {{ $animal->name }} </a>
-                </td>
-                <td>
-                    {{ $feeding->description  }}
-                </td>
-                <td>
-                    <a href="{{ route('feeding.edit', $feeding->id) }}" class="btn btn-primary">Edit</a>
-
-                    {!! Form::open(['method' => 'DELETE','route' => ['feeding.destroy', $feeding->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
-                </td>
-            </tr>
-            @endforeach
-        @endforeach
-    </table>
-    <div class="pull-right">
-        <a href="{{ route('feeding.create')  }}" class="btn btn-default">
-            <span class="glyphicon glyphicon-plus"></span>
-            Add new
-        </a>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>feedings</h2>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="{{ route('feeding.create')  }}" class="btn btn-info">
+                <span class="glyphicon glyphicon-plus"></span>
+                Add new
+            </a>
+        </div>
     </div>
+    <div class="row">
+    @foreach($all_feedings as $feeding)
+        <div class="col-md-6">
+            <div class="border" style="border: 1px solid lightgray; padding: 30px; margin-top: 20px">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Date</strong>
+                        <h4>{{ $feeding->date }}</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Time</strong>
+                        <h4>{{ $feeding->time }}</h4>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Feeder</strong>
+                        <a href="{{ route('settings.show', $feeding->users->id) }}"
+                           style="display:block; font-size: 1.1em; margin-top: 0.5em;">
+                           {{ $feeding->users->user_name }}
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Amount of food</strong>
+                        <h4>{{ $feeding->amount_of_food }} {{ $feeding->unit }}</h4>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <br>
+                    <strong>Description:</strong>
+                    {{ $feeding->description }}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                @foreach($feeding->animals as $animal)
+                    <div class="col-md-6" style="margin-top: 18px; margin-bottom: 18px">
+                        <div class="border" style="border: 1px solid lightgray; padding: 15px;">
+                            <p style="display: block">
+                                <strong>Animal: </strong>
+                                <a href="{{ route('animals.show', $animal->id) }}"> {{ $animal->name }} </a>
+                            </p>
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['feeding.remove', $feeding->id, $animal->id, count($feeding->animals)],
+                                                        'style'=>'display:inline',]) !!}
+                            {{Form::button('<i class="glyphicon glyphicon-remove"></i> Remove',
+                                           array('type'  => 'submit',
+                                                 'class' => 'btn btn-danger'))}}
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <div class="row" style="margin-top: 20px">
+                <div class="col-md-12 text-right">
+                    {!! Form::open(['method' => 'GET', 'route' => ['feeding.edit', $feeding->id],
+                                        'style'=>'display:inline',]) !!}
+                    {{Form::button('<i class="glyphicon glyphicon-edit"></i> Edit',
+                                               array('type'  => 'submit',
+                                                     'class' => 'btn btn-primary'))}}
+                    {!! Form::close() !!}
+                    {!! Form::open(['method' => 'DELETE', 'route' => ['feeding.destroy', $feeding->id],
+                                                            'style'=>'display:inline',]) !!}
+                    {{Form::button('<i class="glyphicon glyphicon-remove"></i> Delete',
+                                               array('type'  => 'submit',
+                                                     'class' => 'btn btn-danger'))}}
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+    </div>
+    <hr style="height:30px; visibility:hidden;" />
 @endsection

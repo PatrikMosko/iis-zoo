@@ -41,9 +41,9 @@
             </h3>
         </div>
         <div class="col-md-2">
-            <strong>Account status:</strong>
+            <strong>Outlet</strong>
             <h3>
-                {{ $animal->description  }}
+                {{ $animal->outlet->name  }}
             </h3>
         </div>
     </div>
@@ -51,10 +51,9 @@
     <div class="well invisible"></div>
 
     <div class="row text-center">
-        <div class="col-md-3"></div>
-        <div class="col-md-2">
-            <strong>outlet:</strong>
-            <h3>{{ $animal->outlet->name }}</h3>
+        <div class="col-md-12">
+            <strong>Description:</strong>
+            <i style="display:block; margin-top: 10px">{{ $animal->description  }}</i>
         </div>
     </div>
 

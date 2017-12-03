@@ -26,7 +26,8 @@ class CreateFeedingTable extends Migration
             // brief description for particular feeding
             $table->string('description');
             // date of the feeding
-            $table->dateTime('date_time');
+            $table->date('date');
+            $table->time('time');
 
             // foreign key pointing to users table
             $table->integer('user_id')->unsigned();

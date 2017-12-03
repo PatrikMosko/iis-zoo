@@ -22,6 +22,7 @@ class CleaningSeeder extends Seeder
         $outlet2 = Outlet::where('id', 1)->first();
         $user1 = User::where('id', 1)->first();
         $user2 = User::where('id', 2)->first();
+        $user3 = User::where('id', 3)->first();
 
         $cleaning1 = new Cleaning();
         $cleaning1->date = Carbon::createFromDate( 2017, 12, 1, null);
@@ -36,8 +37,19 @@ class CleaningSeeder extends Seeder
         $cleaning2->outlet_id = $outlet2->id;
         $cleaning2->save();
 
+        $cleaning3 = new Cleaning();
+        $cleaning3->date = Carbon::createFromDate( 2018, 1, 2, null);
+        $cleaning3->cleaning_time = Carbon::createFromTime( 15, 30, 0);
+        $cleaning3->description = 'New years cleaning :) Happy new year!';
+        $cleaning3->outlet_id = $outlet2->id;
+        $cleaning3->save();
+
         $cleaning1->users()->attach($user1);
         $cleaning2->users()->attach($user2);
+        $cleaning2->users()->attach($user3);
+        $cleaning3->users()->attach($user1);
+        $cleaning3->users()->attach($user2);
+        $cleaning3->users()->attach($user3);
 
     }
 }

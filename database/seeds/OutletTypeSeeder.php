@@ -26,5 +26,11 @@ class OutletTypeSeeder extends Seeder
         $outletType2->req_users_num = 3;
         $outletType2->cleaning_time = Carbon::createFromTime( 2, 0, 0);
         $outletType2->save();
+
+        $outletType2 = new OutletType();
+        $outletType2->name = 'aquarium';
+        $outletType2->req_users_num = 3;
+        $outletType2->cleaning_time = Carbon::createFromTime( 2, 0, 0);
+        $outletType2->save();
     }
 }
