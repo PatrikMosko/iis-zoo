@@ -61,10 +61,10 @@ class SettingsController extends Controller
     {
         // validation of input
         request()->validate([
-            'user_name' => 'required',
+            'user_name' => array('required', 'regex:/^[a-zA-Z]([a-zA-Z])*$/u'),
             'email' => 'required',
             'role' => 'required',
-            'full_name' => 'required',
+            'full_name' => array('required', 'regex:/^[a-zA-Z]([a-zA-Z])*([\s]([a-zA-Z])*){1,2}$/u'),
             'phone' => 'required',
             'birth_date' => 'required',
             'is_active' => 'required'

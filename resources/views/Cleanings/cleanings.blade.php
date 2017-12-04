@@ -17,7 +17,7 @@
                 <h2>Cleanings</h2>
             </div>
             <div class="col-md-6 text-right">
-                <a href="{{ route('feeding.create')  }}" class="btn btn-info">
+                <a href="{{ route('cleanings.create')  }}" class="btn btn-info">
                     <span class="glyphicon glyphicon-plus"></span>
                     Add new
                 </a>

@@ -31,8 +31,10 @@ class AnimalsController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            'name'          => 'required',
-            'birth_date'    => 'required'
+            'name'          => array('required', 'regex:/^[a-zA-Z]([a-zA-Z])*$/u'),
+            'birth_date'    => 'required',
+            'outlet'        => 'required',
+            'birth_country' => array('nullable', 'regex:/^[a-zA-Z]([a-zA-Z])*([\s]([a-zA-Z])*)*$/u')
         ]);
 
         $params = $request->all();
@@ -73,17 +75,25 @@ class AnimalsController extends Controller
     }
 
     public function update(Request $request, $id){
+
+        $request->validate([
+            'name'          => array('required', 'regex:/^[a-zA-Z]([a-zA-Z])*$/u'),
+            'birth_date'    => 'required',
+            'outlet'        => 'required',
+            'birth_country' => array('nullable', 'regex:/^[a-zA-Z]([a-zA-Z])*([\s]([a-zA-Z])*)*$/u')
+        ]);
+
         $params = $request->all();
 
         $newAnimal = Animal::find($id);
-        $newAnimal->name = $params['name'];
-        $newAnimal->outlet_id = current($params['outlet']);
+        $newAnimal->name            = $params['name'];
+        $newAnimal->outlet_id       = current($params['outlet']);
         $newAnimal->animal_types_id = current($params['animal_types']);
-        $newAnimal->birth_date = $params['birth_date'];
-        $newAnimal->birth_country = $params['birth_country'];
-        $newAnimal->parent = $params['parent'];
-        $newAnimal->occurrence_place = $params['occurrence'];
-        $newAnimal->description = $params['description'];
+        $newAnimal->birth_date      = $params['birth_date'];
+        $newAnimal->birth_country   = $params['birth_country'];
+        $newAnimal->parent          = $params['parent'];
+        $newAnimal->occurrence_place= $params['occurrence'];
+        $newAnimal->description     = $params['description'];
         $newAnimal->save();
 
         $request->session()->flash('alert-success', 'Animal was successfully edited!');
