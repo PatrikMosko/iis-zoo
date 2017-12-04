@@ -45,11 +45,11 @@
         $(function () {
             //http://eonasdan.github.io/bootstrap-datetimepicker/
             $('#date_picker').datetimepicker({
-                locale: 'sk',
+                locale: 'en',
                 format: 'YYYY-MM-DD'
             });
             $('#time_picker').datetimepicker({
-                locale: 'sk',
+                locale: 'en',
                 format: 'HH:mm:ss'
             });
         });

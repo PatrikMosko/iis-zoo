@@ -44,11 +44,11 @@
             </div>
             <div class="form-group">
                 <strong>Outlet type</strong>
-                {!! Form::select('outlet_types[]', $outlet_types + ['none' => 'none'] , 'none', ['class' => 'form-control']) !!}
+                {!! Form::select('outlet_types[]', $outlet_types + ['none' => 'none'] , $actual_outlet_type, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 <strong>Animal type</strong>
-                {!! Form::select('animal_types[]', $animal_types + ['none' => 'none'] , 'none', ['class' => 'form-control']) !!}
+                {!! Form::select('animal_types[]', $animal_types + ['none' => 'none'] , $actual_animal_type, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 <strong>Users</strong>
