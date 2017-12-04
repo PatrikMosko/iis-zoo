@@ -2,11 +2,15 @@
 
 @section('content')
 
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
+    <div class="flash-message">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has('alert-' . $msg))
+
+                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+            @endif
+        @endforeach
+    </div> <!-- end .flash-message -->
+
     <div class="row">
         <div class="col-md-6">
             <h2>cleanings</h2>
@@ -69,6 +73,13 @@
                         </div>
                     @endforeach
                 </div>
+
+                    <div class="flash-message">
+                        @if(Session::has('alert-success-'.$cleaning->id))
+                            <p class="alert alert-success">{{ Session::get('alert-success-'. $cleaning->id) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                        @endif
+                    </div> <!-- end .flash-message -->
+
                 <div class="row" style="margin-top: 20px">
                     <div class="col-md-12 text-right">
                         {!! Form::open(['method' => 'GET', 'route' => ['cleanings.edit', $cleaning->id],

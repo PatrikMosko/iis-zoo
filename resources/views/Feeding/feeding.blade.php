@@ -2,11 +2,15 @@
 
 @section('content')
 
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
+    <div class="flash-message">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has('alert-' . $msg))
+
+                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+            @endif
+        @endforeach
+    </div> <!-- end .flash-message -->
+
     <div class="row">
         <div class="col-md-6">
             <h2>feedings</h2>
@@ -66,7 +70,7 @@
                                 <a href="{{ route('animals.show', $animal->id) }}"> {{ $animal->name }} </a>
                             </p>
                             {!! Form::open(['method' => 'DELETE', 'route' => ['feeding.remove', $feeding->id, $animal->id, count($feeding->animals)],
-                                                        'style'=>'display:inline',]) !!}
+                                                        'style'=>'display:inline']) !!}
                             {{Form::button('<i class="glyphicon glyphicon-remove"></i> Remove',
                                            array('type'  => 'submit',
                                                  'class' => 'btn btn-danger'))}}
@@ -75,16 +79,23 @@
                     </div>
                 @endforeach
             </div>
+
+            <div class="flash-message">
+                    @if(Session::has('alert-success-'.$feeding->id))
+                        <p class="alert alert-success">{{ Session::get('alert-success-'. $feeding->id) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                    @endif
+            </div> <!-- end .flash-message -->
+
             <div class="row" style="margin-top: 20px">
                 <div class="col-md-12 text-right">
                     {!! Form::open(['method' => 'GET', 'route' => ['feeding.edit', $feeding->id],
-                                        'style'=>'display:inline',]) !!}
+                                        'style'=>'display:inline']) !!}
                     {{Form::button('<i class="glyphicon glyphicon-edit"></i> Edit',
                                                array('type'  => 'submit',
                                                      'class' => 'btn btn-primary'))}}
                     {!! Form::close() !!}
                     {!! Form::open(['method' => 'DELETE', 'route' => ['feeding.destroy', $feeding->id],
-                                                            'style'=>'display:inline',]) !!}
+                                                            'style'=>'display:inline']) !!}
                     {{Form::button('<i class="glyphicon glyphicon-remove"></i> Delete',
                                                array('type'  => 'submit',
                                                      'class' => 'btn btn-danger'))}}

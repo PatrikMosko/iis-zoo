@@ -61,6 +61,7 @@ class TrainingsController extends Controller
             $newExternalType->save();
         }
 
+        $request->session()->flash('alert-success', 'Training type was successfully created!');
         return redirect()->route('trainings.index');
     }
 }

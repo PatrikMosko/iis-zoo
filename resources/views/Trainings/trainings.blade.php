@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <div class="flash-message">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has('alert-' . $msg))
+
+                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+            @endif
+        @endforeach
+    </div> <!-- end .flash-message -->
+
     @if(!$is_admin)
     <div class="row">
         <div class="col-md-12">
@@ -9,8 +19,9 @@
     </div>
     <div class="row">
         @foreach($logged_user_trainings as $training)
+        @if($training->trainingable)
         <div class="col-md-4">
-            <div class="border" style="border: 1px solid lightgray; padding: 30px; margin-top: 20px; "> {{--max-height:271px;--}}
+            <div class="border" style="border: 1px solid lightgray; padding: 30px; margin-top: 20px; ">
                 @if($training->trainingable->company_name)
                     <h4 class="text-center" style="margin-bottom: 30px"> External company</h4>
                     <p>
@@ -38,6 +49,7 @@
                 <div class="row">
             @endif
         </div>
+        @endif
         @endforeach
     </div>
 
@@ -116,7 +128,7 @@
 
                             <p><strong>Users in training:</strong>
                                 @foreach($training_e->users as $user)
-                                    <a href="{{ route('settings.show', $user->id) }}">{{$user->user_name}}</a> ,
+                                    <a href="{{ route('settings.show', $user->id) }}">{{$user->user_name}}  </a>
                                 @endforeach
                             </p>
                         </div>
@@ -132,13 +144,13 @@
                                 {{--Edit--}}
                             {{--</a>--}}
                             @if($is_admin)
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['trainingExternal.destroy', $training_e->id], 'style'=>'display:inline',]) !!}
-                                {{Form::button('<span class="glyphicon glyphicon-remove"></span> Delete',array('type'  => 'submit', 'class' => 'btn btn-danger'))}}
-                            {!! Form::close() !!}
-
-                            {!! Form::open(['method' => 'GET', 'route' => ['trainingExternal.edit', $training_e->id], 'style'=>'display:inline']) !!}
+                                {!! Form::open(['method' => 'GET', 'route' => ['trainingExternal.edit', $training_e->id], 'style'=>'display:inline']) !!}
                                 {{ Form::button('<span class="glyphicon glyphicon-edit"></span> Edit', array('type'  => 'submit','class' => 'btn btn-primary'))}}
-                            {!! Form::close() !!}
+                                {!! Form::close() !!}
+
+                                {!! Form::open(['method' => 'DELETE', 'route' => ['trainingExternal.remove', $training_e->id, $loop->count, $external_collection->id], 'style'=>'display:inline']) !!}
+                                {{Form::button('<span class="glyphicon glyphicon-remove"></span> Delete',array('type'  => 'submit', 'class' => 'btn btn-danger'))}}
+                                {!! Form::close() !!}
                             @endif
                         </div>
                     </div>
@@ -190,7 +202,7 @@
                             @endif
                             <p><strong>Users in training:</strong>
                             @foreach($training_i->users as $user)
-                                    <a href="{{ route('settings.show', $user->id) }}">{{$user->user_name}}</a> ,
+                                    <a href="{{ route('settings.show', $user->id) }}">{{$user->user_name}} </a>
                             @endforeach
                             </p>
                         </div>
@@ -201,7 +213,8 @@
                                 <span class="glyphicon glyphicon-edit"></span>
                                 Edit
                             </a>
-                                {!! Form::open(['method' => 'DELETE', 'route' => ['trainingInternal.destroy', $training_i->id], 'style'=>'display:inline',]) !!}
+
+                                {!! Form::open(['method' => 'DELETE', 'route' => ['trainingInternal.remove', $training_i->id, $loop->count, $internal_collection->id], 'style'=>'display:inline']) !!}
                                     {{Form::button('<span class="glyphicon glyphicon-remove"></span> Delete',array('type'  => 'submit', 'class' => 'btn btn-danger'))}}
                                 {!! Form::close() !!}
                         </div>
@@ -223,39 +236,43 @@
             </div>
         </div>
         <div class="row">
+{{--         @if(!$logged_user_trainings)--}}
             @foreach($logged_user_trainings as $training)
+                @if($training->trainingable)
                 <div class="col-md-4">
-                    <div class="border" style="border: 1px solid lightgray; padding: 30px; margin-top: 20px; "> {{--max-height:271px;--}}
-                        @if($training->trainingable->company_name)
-                            <h4 class="text-center" style="margin-bottom: 30px"> External company</h4>
-                            <p>
-                                <strong>Company name:</strong> {{ $training->trainingable->company_name }}
-                            </p>
-                            <p>
-                                <strong>address:</strong> {{ $training->trainingable->company_address }}
-                            </p>
-                        @else
-                            <h4 class="text-center" style="margin-bottom: 30px"> Internal</h4>
-                            <p>
-                                <strong>Place:</strong>
-                                <em>{{ $training->trainingable->place }}</em>
-                            </p>
-                        @endif
+                    <div class="border" style="border: 1px solid lightgray; padding: 30px; margin-top: 20px; ">
+                                @if($training->trainingable->company_name)
+                                    <h4 class="text-center" style="margin-bottom: 30px"> External company</h4>
+                                    <p>
+                                        <strong>Company name:</strong> {{ $training->trainingable->company_name }}
+                                    </p>
+                                    <p>
+                                        <strong>address:</strong> {{ $training->trainingable->company_address }}
+                                    </p>
+                                @else
+                                    <h4 class="text-center" style="margin-bottom: 30px"> Internal</h4>
+                                    <p>
+                                        <strong>Place:</strong>
+                                        <em>{{ $training->trainingable->place }}</em>
+                                    </p>
+                                @endif
 
-                        <p><strong>Name:</strong> <em>{{$training->name}}</em></p>
-                        <p><strong>Date:</strong> <em>{{$training->date}}</em></p>
-                        <p><strong>For outlet type:</strong> <em>{{$training->outlet_types['name']}}</em></p>
-                        <p><strong>For animal type:</strong> <em>{{$training->animal_types['type_name']}}</em></p>
-                    </div>
-                    {{-- add row after each 3 columns --}}
-                    @if ($loop->iteration % 3 == 0)
-                </div>
-                <div class="row">
+                                <p><strong>Name:</strong> <em>{{$training->name}}</em></p>
+                                <p><strong>Date:</strong> <em>{{$training->date}}</em></p>
+                                <p><strong>For outlet type:</strong> <em>{{$training->outlet_types['name']}}</em></p>
+                                <p><strong>For animal type:</strong> <em>{{$training->animal_types['type_name']}}</em></p>
+                            </div>
+                            {{-- add row after each 3 columns --}}
+                            @if ($loop->iteration % 3 == 0)
+                        </div>
+                        <div class="row">
+                            @endif
+                        </div>
                     @endif
+                    @endforeach
+                     {{--@endif--}}
                 </div>
-            @endforeach
-        </div>
 
-        <hr/>
-    @endif
-@endsection
+                <hr/>
+            @endif
+        @endsection
