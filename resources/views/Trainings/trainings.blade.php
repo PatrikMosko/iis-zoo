@@ -7,24 +7,48 @@
         </div>
     </div>
     <div class="row">
+        @foreach($logged_user_trainings as $training)
         <div class="col-md-4">
-            <div class="border" style="border: 1px solid lightgray; padding: 30px; margin-top: 20px">
-                <p>
-                    <strong>Company:</strong> <em>SolarWinds</em>
-                    <span>- external</span>
-                </p>
-                <p><strong>Name:</strong> <em>Training for Bird outlets</em></p>
-                <p><strong>Date:</strong> <em>2017-12-01</em></p>
+            <div class="border" style="border: 1px solid lightgray; padding: 30px; margin-top: 20px; "> {{--max-height:271px;--}}
+                @if($training->trainingable->company_name)
+                    <h4 class="text-center" style="margin-bottom: 30px"> External company</h4>
+                    <p>
+                        <strong>Company name:</strong> {{ $training->trainingable->company_name }}
+                    </p>
+                    <p>
+                        <strong>address:</strong> {{ $training->trainingable->company_address }}
+                    </p>
+                @else
+                    <h4 class="text-center" style="margin-bottom: 30px"> Internal</h4>
+                    <p>
+                        <strong>Place:</strong>
+                        <em>{{ $training->trainingable->place }}</em>
+                    </p>
+                @endif
+
+                <p><strong>Name:</strong> <em>{{$training->name}}</em></p>
+                <p><strong>Date:</strong> <em>{{$training->date}}</em></p>
+                <p><strong>For outlet type:</strong> <em>{{$training->outlet_types['name']}}</em></p>
+                <p><strong>For animal type:</strong> <em>{{$training->animal_types['type_name']}}</em></p>
             </div>
+            {{-- add row after each 3 columns --}}
+            @if ($loop->iteration % 3 == 0)
+                </div>
+                <div class="row">
+            @endif
         </div>
+        @endforeach
     </div>
+
+    @if($is_admin)
+
+    <hr/>
 
     <div class="row">
         <div class="col-md-12">
             <h2>All available Trainings</h2>
         </div>
     </div>
-    @if($is_admin)
     <div class="row text-center">
         <div class="col-md-5">
             <div class="border" style="border: 1px solid lightgray; padding: 0 30px 30px; margin-top: 20px">
@@ -42,14 +66,12 @@
             </div>
         </div>
     </div>
-    @endif
 
     <div class="row">
         <div class="col-md-6">
             <h2>External</h2>
             @foreach ($all_external_trainings as $external_collection)
                 <div class="border" style="border: 1px solid lightgray; padding: 0 30px 30px; margin-top: 20px">
-
                     <h3 style="margin-top: 30px;"><strong>Company:</strong> <em>{{$external_collection->company_name}}</em></h3>
                     <hr/>
                     <h4>
@@ -58,7 +80,6 @@
                     <em>{{$external_collection->company_address}}</em>
 
                     <div class="row" style="margin-top: 20px">
-                        @if($is_admin)
                         <div class="col-md-12">
                             <a href="{{ route('trainingExternal.create', $external_collection->id)  }}" class="btn btn-info">
                                 <span class="glyphicon glyphicon-plus"></span>
@@ -73,7 +94,6 @@
                                 {{--Remove--}}
                             {{--</a>--}}
                         </div>
-                        @endif
                     </div>
                     <hr>
                     <h3 style="margin-top: 30px;">Available Trainings</h3>
@@ -92,6 +112,12 @@
                             @if($training_e->animal_types['type_name'])
                                 <p><strong>For animal type:</strong> <em> {{ $training_e->animal_types['type_name']}} </em></p>
                             @endif
+
+                            <p><strong>Users in training:</strong>
+                                @foreach($training_e->users as $user)
+                                    <a href="{{ route('settings.show', $user->id) }}">{{$user->user_name}}</a> ,
+                                @endforeach
+                            </p>
                         </div>
                     </div>
                     <div class="row">
@@ -138,14 +164,12 @@
                     <em>{{$internal_collection->place}}</em>
 
                     <div class="row" style="margin-top: 20px">
-                        @if($is_admin)
                         <div class="col-md-12">
                             <a href="{{ route('trainingInternal.create', $internal_collection->id) }}" class="btn btn-info">
                                 <span class="glyphicon glyphicon-plus"></span>
                                 add training
                             </a>
                         </div>
-                        @endif
                     </div>
                     <hr/>
                     <h3 style="margin-top: 30px;">Available Trainings</h3>
@@ -162,11 +186,16 @@
                             @endif
                             @if($training_i->animal_types['type_name'])
                                 <p><strong>For animal type:</strong> <em> {{ $training_i->animal_types['type_name']}} </em></p>
-                            @endif                        </div>
+                            @endif
+                            <p><strong>Users in training:</strong>
+                            @foreach($training_i->users as $user)
+                                    <a href="{{ route('settings.show', $user->id) }}">{{$user->user_name}}</a> ,
+                            @endforeach
+                            </p>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            @if($is_admin)
                             <a href="{{ route('trainingInternal.edit', $training_i->id) }}" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-edit"></span>
                                 Edit
@@ -174,7 +203,6 @@
                                 {!! Form::open(['method' => 'DELETE', 'route' => ['trainingInternal.destroy', $training_i->id], 'style'=>'display:inline',]) !!}
                                     {{Form::button('<span class="glyphicon glyphicon-remove"></span> Delete',array('type'  => 'submit', 'class' => 'btn btn-danger'))}}
                                 {!! Form::close() !!}
-                            @endif
                         </div>
                     </div>
                     <hr/>
@@ -185,4 +213,5 @@
         </div>
     </div>
     <hr style="height:30px; visibility:hidden;" />
+    @endif
 @endsection

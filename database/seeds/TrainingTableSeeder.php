@@ -120,8 +120,12 @@ class TrainingTableSeeder extends Seeder
          */ // todo
 
         $newTraining ->users()->attach($user1);
+        $newTraining ->users()->attach($user2);
+        $newTraining ->users()->attach($user3);
         $newTraining2->users()->attach($user2);
         $newTraining3->users()->attach($user2);
+        $newTraining4->users()->attach($user1);
+        $newTraining4->users()->attach($user3);
         $newTraining4->users()->attach($user2);
         $newTraining5->users()->attach($user3);
         $newTraining6->users()->attach($user1);
