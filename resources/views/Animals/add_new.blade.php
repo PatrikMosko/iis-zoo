@@ -5,13 +5,6 @@
 
     {{ Form::open(array('route' => 'animals.store')) }}
 
-    {{--<td>{{ $animal->name  }}</td>--}}
-    {{--<td>{{ $animal->outlet->name }}</td>--}}
-    {{--<td>{{ $animal->birth_date }}</td>--}}
-    {{--<td>{{ $animal->birth_country }}</td>--}}
-    {{--<td>{{ $animal->parent }}</td>--}}
-    {{--<td>{{ $animal->occurrence_place }}</td>--}}
-    {{--<td>{{ $animal->description }}</td>--}}
 
     <div class="row">
         <div class="col-md-3"></div>
@@ -34,7 +27,7 @@
 
             <div class="form-group">
                 <strong>Birth date:</strong>
-                <div class='input-group date' id='just_date'>
+                <div class='input-group date' id='date_picker'>
                     {!!Form::text('birth_date', null,
                         array('class' => 'form-control', 'placeholder' => 'please enter date...'))
                     !!}

@@ -45,7 +45,7 @@ class CleaningsController extends Controller
         $new_cleaning->outlet_id     = current($params['outlet']);
         $new_cleaning->date          = $params['date'];
         $new_cleaning->cleaning_time = $params['cleaning_time'];
-        $new_cleaning->description   = $params['description'] ? $params['description']: '';
+        $new_cleaning->description   = $params['description'];
         $new_cleaning->save();
 
         // update animal pivot table
