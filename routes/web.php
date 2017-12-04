@@ -61,3 +61,4 @@ Route::resource('/Feeding/feeding', 'FeedingController');
 Route::delete(  '/Feeding/feeding/remove/{id}/{animal}/{count}',
                 ['as' => 'feeding.remove', 'uses' => 'FeedingController@remove']
 );
+
