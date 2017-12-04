@@ -53,6 +53,7 @@ class CleaningsController extends Controller
             $new_cleaning->users()->attach($cleaner);
         }
 
+        $request->session()->flash('alert-success', 'Cleaning was successfully added!');
         return redirect()->route('cleanings.index');
     }
 
@@ -95,31 +96,31 @@ class CleaningsController extends Controller
             $cleaning->users()->attach($cleaner);
         }
 
-        return redirect()->route('cleanings.index')
-            ->with(['success','Cleaning updated successfully!']);
+        $request->session()->flash('alert-success-' . $cleaning->id, 'Cleaning was successfully edited!');
+        return redirect()->route('cleanings.index');
     }
 
-    public function remove($id, $user, $count)
+    public function remove(Request $request, $id, $user, $count)
     {
         $cleaning = Cleaning::find($id);
-        if ($count == 1)
+        if ($count == 1) {
             $cleaning->delete();
+            $request->session()->flash('alert-success', 'Cleaning was successfully deleted!');
+        }
 
         $cleaning->users()->detach($user);
 
-        return redirect()->route('cleanings.index')
-            ->with(['success','Cleaning deleted successfully!']);
+        $request->session()->flash('alert-success-' . $cleaning->id, 'User was successfully deleted!');
+        return redirect()->route('cleanings.index');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-
         $cleaning = Cleaning::find($id);
         $cleaning->delete();
         $cleaning->users()->detach();
 
-        return redirect()->route('cleanings.index')
-            ->with(['success','Cleaning deleted successfully!']);
+        $request->session()->flash('alert-success', 'Cleaning was successfully deleted!');
+        return redirect()->route('cleanings.index');
     }
-
 }

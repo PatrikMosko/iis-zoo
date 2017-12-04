@@ -79,6 +79,7 @@ class InternalTrainingController extends Controller
             $newTraining->users()->attach($user);
         }
 
+        $request->session()->flash('alert-success', 'Internal training was successfully created!');
         return redirect()->route('trainings.index');
     }
 
@@ -89,8 +90,15 @@ class InternalTrainingController extends Controller
         $animal_types = AnimalType::all()->pluck('type_name', 'id')->toArray();
         $users = User::all()->pluck('user_name','id');
 
-        $actual_outlet_type = $training->outlet_types()->first()->id;
-        $actual_animal_type = $training->animal_types()->first()->id;
+        if($training->outlet_types()->first() != null)
+            $actual_outlet_type = $training->outlet_types()->first()->id;
+        else
+            $actual_outlet_type = 'none';
+
+        if($training->animal_types()->first() != null)
+            $actual_animal_type = $training->animal_types()->first()->id;
+        else
+            $actual_animal_type = 'none';
 
         //todo sometimes is users_check undefined why? (seeder records)
         $collections = Training::with('users')->where('id', $id)->first()['users'];
@@ -143,17 +151,27 @@ class InternalTrainingController extends Controller
             $newTraining->users()->attach($user);
         }
 
-        return redirect()->route('trainings.index')
-            ->with(['success','Training updated successfully!']);
+        $request->session()->flash('alert-success', 'Internal training was successfully updated!');
+        return redirect()->route('trainings.index');
     }
 
-    public function destroy($id)
+    public function remove(Request $request, $id, $count, $id_internal)
     {
         $training = Training::find($id);
+
+        // delete whole internal training
+        if ($count == 1) {
+            $internal_type = TrainingInternal::find($id_internal);
+            $internal_type->delete();
+
+            $request->session()->flash('alert-success', 'Internal training type was successfully deleted!');
+            return redirect()->route('trainings.index');
+        }
+
         $training->delete();
         $training->users()->detach();
 
-        return redirect()->route('trainings.index')
-            ->with(['success','Training deleted successfully!']);
+        $request->session()->flash('alert-success', 'Internal training was successfully deleted!');
+        return redirect()->route('trainings.index');
     }
 }

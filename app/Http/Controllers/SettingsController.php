@@ -118,11 +118,12 @@ class SettingsController extends Controller
 
 
         if ($user == null || $user == false){
-            return redirect()->route('settings.index')
-                ->with(['failed','User updated unsuccessfully']);
+
+            $request->session()->flash('alert-danger', 'User was unsuccessful added!');
+            return redirect()->route('settings.index');
         }
-        return redirect()->route('settings.index')
-            ->with(['success','User updated successfully']);
+        $request->session()->flash('alert-success', 'User was successful added!');
+        return redirect()->route('settings.index');
 
     }
 
@@ -132,7 +133,7 @@ class SettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $user = User::find($id);
         // at first delete instance of user
@@ -141,9 +142,8 @@ class SettingsController extends Controller
         // detach all roles from pivot table
         $user->roles()->detach();
 
-
-        return redirect()->route('settings.index')
-            ->with(['success','User deleted successfully']);
+        $request->session()->flash('alert-success', 'User was successfully deleted!');
+        return redirect()->route('settings.index');
     }
 
     public function userIndex()
@@ -177,6 +177,7 @@ class SettingsController extends Controller
             'email'     => $request->get('email')
         ]);
 
+        $request->session()->flash('alert-success', 'Profile was successfully updated!');
         return redirect()->route('settingsUser.index');
     }
 }

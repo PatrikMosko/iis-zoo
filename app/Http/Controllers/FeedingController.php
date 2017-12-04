@@ -68,6 +68,7 @@ class FeedingController extends Controller
             $new_feeding->animals()->attach($animal);
         }
 
+        $request->session()->flash('alert-success', 'Feeding was successfully added!');
         return redirect()->route('feeding.index');
     }
 
@@ -118,30 +119,31 @@ class FeedingController extends Controller
             $feeding->animals()->attach($animal);
         }
 
-        return redirect()->route('feeding.index')
-            ->with(['success','User updated successfully']);
+        $request->session()->flash('alert-success-' . $feeding->id, 'Feeding was successfully edited!');
+        return redirect()->route('feeding.index');
     }
 
-    public function remove($id, $animal, $count)
+    public function remove(Request $request, $id, $animal, $count)
     {
         $feeding = Feeding::find($id);
-        if ($count == 1)
+        if ($count == 1) {
             $feeding->delete();
-
+            $request->session()->flash('alert-success', 'Feeding was successfully deleted!');
+        }
         $feeding->animals()->detach($animal);
 
-        return redirect()->route('feeding.index')
-            ->with(['success','Animal removed successfully!']);
+        $request->session()->flash('alert-success-' . $feeding->id, 'Animal was successfully deleted!');
+        return redirect()->route('feeding.index');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $feeding = Feeding::find($id);
         $feeding->delete();
         // detach feedings from pivot table
         $feeding->animals()->detach();
 
-        return redirect()->route('feeding.index')
-            ->with(['success','Feeding destroyed successfully']);
+        $request->session()->flash('alert-success', 'Feeding was successfully deleted!');
+        return redirect()->route('feeding.index');
     }
 }

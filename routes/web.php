@@ -10,6 +10,11 @@
 |
 */
 
+Route::group(['middleware' => 'web'], function () {
+    // Put routes in here
+
+
+
 Route::get('/', 'HomeController@index')->name('home');
 /*
  * Animals
@@ -39,6 +44,8 @@ Route::get('/Trainings/trainings', 'TrainingsController@index')->name('trainings
 
 Route::get('/Trainings/trainings/createExternal/{id}', array('as' => 'trainingExternal.create', 'uses' => 'ExternalTrainingController@create'));
 Route::get('/Trainings/trainings/createInternal/{id}', array('as' => 'trainingInternal.create', 'uses' => 'InternalTrainingController@create'));
+Route::delete('/Trainings/trainings/removeInternal/{id}/{count}/{id_internal}', ['as' => 'trainingInternal.remove', 'uses' => 'InternalTrainingController@remove']);
+Route::delete('/Trainings/trainings/removeExternal/{id}/{count}/{id_external}', ['as' => 'trainingExternal.remove', 'uses' => 'ExternalTrainingController@remove']);
 Route::resource('/Trainings/trainings/trainingExternal', 'ExternalTrainingController', ['except' => 'create']);
 Route::resource('/Trainings/trainings/trainingInternal', 'InternalTrainingController', ['except' => 'create']);
 
@@ -61,4 +68,6 @@ Route::resource('/Feeding/feeding', 'FeedingController');
 Route::delete(  '/Feeding/feeding/remove/{id}/{animal}/{count}',
                 ['as' => 'feeding.remove', 'uses' => 'FeedingController@remove']
 );
+
+});
 

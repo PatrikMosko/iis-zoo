@@ -48,6 +48,7 @@ class AnimalsController extends Controller
         $newAnimal->description     = $params['description'];
         $newAnimal->save();
 
+        $request->session()->flash('alert-success', 'Animal was successfully created!');
         return redirect()->route('animals.index');
     }
 
@@ -55,15 +56,6 @@ class AnimalsController extends Controller
         $animal = Animal::find($id);
 
         return view('Animals/detail', compact('animal'));
-    }
-
-    public function destroy($id){
-        $animal = Animal::find($id);
-        $animal->delete();
-        // detach animals from pivot table
-        $animal->feedings()->detach();
-
-        return redirect()->route('animals.index');
     }
 
     public function edit($id){
@@ -94,6 +86,17 @@ class AnimalsController extends Controller
         $newAnimal->description = $params['description'];
         $newAnimal->save();
 
+        $request->session()->flash('alert-success', 'Animal was successfully edited!');
+        return redirect()->route('animals.index');
+    }
+
+    public function destroy(Request $request, $id){
+        $animal = Animal::find($id);
+        $animal->delete();
+        // detach animals from pivot table
+        $animal->feedings()->detach();
+
+        $request->session()->flash('alert-success', 'Animal was successfully deleted!');
         return redirect()->route('animals.index');
     }
 
@@ -116,6 +119,7 @@ class AnimalsController extends Controller
         $newAnimalType->description = $params['description'];
         $newAnimalType->save();
 
+        $request->session()->flash('alert-success', 'Animal type was successfully created!');
         return redirect()->route('animals.index');
     }
 
@@ -133,14 +137,15 @@ class AnimalsController extends Controller
         $animal_type->description = $params['description'];
         $animal_type->save();
 
+        $request->session()->flash('alert-success', 'Animal type was successfully edited!');
         return redirect()->route('animals.index');
     }
 
-    public function destroyAnimalType($id){
+    public function destroyAnimalType(Request $request, $id){
         $animal_type = AnimalType::find($id);
-
         $animal_type->delete();
 
+        $request->session()->flash('alert-success', 'Animal type was successfully deleted!');
         return redirect()->route('animals.index');
     }
 }
