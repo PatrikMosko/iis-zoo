@@ -56,9 +56,6 @@ class FeedingController extends Controller
         ]);
 
         $params = $request->all();
-        if($params['amount'] == 0)
-            dd('je to nula');
-
 
         $new_feeding = new Feeding();
         $new_feeding->user_id        = current($params['feeder']); // pass user_id directly from blade, get value from associative array
