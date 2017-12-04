@@ -29,17 +29,23 @@ class AnimalsController extends Controller
     }
 
     public function store(Request $request){
+
+        $request->validate([
+            'name'          => 'required',
+            'birth_date'    => 'required'
+        ]);
+
         $params = $request->all();
 
         $newAnimal = new Animal();
-        $newAnimal->name = $params['name'];
-        $newAnimal->outlet_id = current($params['outlet']);
+        $newAnimal->name            = $params['name'];
+        $newAnimal->outlet_id       = current($params['outlet']);
         $newAnimal->animal_types_id = current($params['animal_types']);
-        $newAnimal->birth_date = $params['birth_date'];
-        $newAnimal->birth_country = $params['birth_country'];
-        $newAnimal->parent = $params['parent'];
-        $newAnimal->occurrence_place = $params['occurrence'];
-        $newAnimal->description = $params['description'];
+        $newAnimal->birth_date      = $params['birth_date'];
+        $newAnimal->birth_country   = $params['birth_country'];
+        $newAnimal->parent          = $params['parent'];
+        $newAnimal->occurrence_place= $params['occurrence'];
+        $newAnimal->description     = $params['description'];
         $newAnimal->save();
 
         return redirect()->route('animals.index');

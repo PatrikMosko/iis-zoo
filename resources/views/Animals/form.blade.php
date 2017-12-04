@@ -26,7 +26,7 @@
 
         <div class="form-group">
             <strong>Birth date:</strong>
-            <div class='input-group date' id='just_date'>
+            <div class='input-group date' id='date_picker'>
                 {!!Form::text('birth_date', null,
                     array('class' => 'form-control', 'placeholder' => 'please enter date...'))
                 !!}
