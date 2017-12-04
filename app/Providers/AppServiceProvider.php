@@ -33,9 +33,11 @@ class AppServiceProvider extends ServiceProvider
             ],
             function($view) {
                 if(auth()->user() != null) {
-                    $is_admin = (User::find(auth()->user()->id))->roles()->first()->id == 1 ? false : true;
+                    $my_id = auth()->user()->id;
+                    $is_admin = User::find($my_id)->roles()->first()->id == 1 ? false : true;
 
-                    $view->with('is_admin', $is_admin);
+                    $view->with('is_admin', $is_admin)->with('my_id', $my_id);
+
                 }
             }
         );
