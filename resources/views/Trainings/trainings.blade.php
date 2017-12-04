@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(!$is_admin)
     <div class="row">
         <div class="col-md-12">
             <h2>My Trainings</h2>
@@ -40,9 +41,9 @@
         @endforeach
     </div>
 
-    @if($is_admin)
+    @endif
 
-    <hr/>
+    @if($is_admin)
 
     <div class="row">
         <div class="col-md-12">
@@ -213,5 +214,48 @@
         </div>
     </div>
     <hr style="height:30px; visibility:hidden;" />
+    @endif
+
+    @if($is_admin)
+        <div class="row">
+            <div class="col-md-12">
+                <h2>My Trainings</h2>
+            </div>
+        </div>
+        <div class="row">
+            @foreach($logged_user_trainings as $training)
+                <div class="col-md-4">
+                    <div class="border" style="border: 1px solid lightgray; padding: 30px; margin-top: 20px; "> {{--max-height:271px;--}}
+                        @if($training->trainingable->company_name)
+                            <h4 class="text-center" style="margin-bottom: 30px"> External company</h4>
+                            <p>
+                                <strong>Company name:</strong> {{ $training->trainingable->company_name }}
+                            </p>
+                            <p>
+                                <strong>address:</strong> {{ $training->trainingable->company_address }}
+                            </p>
+                        @else
+                            <h4 class="text-center" style="margin-bottom: 30px"> Internal</h4>
+                            <p>
+                                <strong>Place:</strong>
+                                <em>{{ $training->trainingable->place }}</em>
+                            </p>
+                        @endif
+
+                        <p><strong>Name:</strong> <em>{{$training->name}}</em></p>
+                        <p><strong>Date:</strong> <em>{{$training->date}}</em></p>
+                        <p><strong>For outlet type:</strong> <em>{{$training->outlet_types['name']}}</em></p>
+                        <p><strong>For animal type:</strong> <em>{{$training->animal_types['type_name']}}</em></p>
+                    </div>
+                    {{-- add row after each 3 columns --}}
+                    @if ($loop->iteration % 3 == 0)
+                </div>
+                <div class="row">
+                    @endif
+                </div>
+            @endforeach
+        </div>
+
+        <hr/>
     @endif
 @endsection

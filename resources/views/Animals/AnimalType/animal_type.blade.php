@@ -6,15 +6,12 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
-        @if($is_admin)
         <th>Action</th>
-        @endif
     </tr>
     @foreach($animal_types as $animal_type)
         <tr>
             <td>{{ $animal_type->type_name }}</td>
             <td>{{ $animal_type->description }}</td>
-            @if($is_admin)
             <td>
                 {{--<a class="btn btn-default" href="{{ route('animalType.show',$animal->id) }}">Show detail</a>--}}
 
@@ -24,7 +21,6 @@
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                 {!! Form::close() !!}
             </td>
-            @endif
         </tr>
     @endforeach
 </table>

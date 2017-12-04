@@ -2,7 +2,7 @@
 
 @section('content')
     <h1 class="text-center">Update animal type</h1>
-{{$animal_type}}
+
     {!! Form::model($animal_type, ['method' => 'PATCH','route' => ['animals.update_type', $animal_type->id]]) !!}
 
     {{csrf_field()}}

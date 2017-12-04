@@ -92,6 +92,9 @@ class ExternalTrainingController extends Controller
         $animal_types = AnimalType::all()->pluck('type_name', 'id')->toArray();
         $users = User::all()->pluck('user_name','id');
 
+        $actual_outlet_type = $training->outlet_types()->first()->id;
+        $actual_animal_type = $training->animal_types()->first()->id;
+
         //todo sometimes is users_check undefined why? (seeder records)
         $collections = Training::with('users')->where('id', $id)->first()['users'];
         foreach ($collections as $collection){
@@ -99,7 +102,7 @@ class ExternalTrainingController extends Controller
         }
 
         return view('Trainings/TrainingExternal/edit',compact('outlet_types', 'animal_types',
-                                                                  'users', 'training', 'users_check'));
+                                                                  'users', 'training', 'users_check', 'actual_outlet_type','actual_animal_type'));
     }
 
     public function update(Request $request, $id)

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\View\View;
 
 class ResetPasswordController extends Controller
 {
@@ -27,8 +30,9 @@ class ResetPasswordController extends Controller
      */
     protected $redirectTo = '/home';
 
+
     /**
-     * Create a new controller instance.
+     * Create a new password controller instance.
      *
      * @return void
      */
@@ -36,4 +40,10 @@ class ResetPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    public function getSendResetLinkEmailSuccessResponse()
+    {
+        return View::make('auth.passwordSent');
+    }
+
 }

@@ -8,7 +8,7 @@
     </div>
 
     {{ Form::open(array('route' => ['trainingExternal.store'])) }}
-    {{--<h1>   wiioopp = {{$type}}</h1>--}}
+
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">

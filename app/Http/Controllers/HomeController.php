@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Carbon\Carbon;
+use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,11 +18,7 @@ class HomeController extends Controller
 
     public function __construct()
     {
-//        parent::__construct(); // get global variables
-
         $this->middleware('auth');
-        //$this->isUserAdmin = session()->get('isUserAdmin');
-
     }
 
     /**
@@ -28,14 +26,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
 
-//        $is_admin = (User::find(Auth::user()->id))->roles()->first()->id==1 ? false : true;
+        $now = Carbon::create();
+        $now->format('l jS \\of F Y h:i:s A');
+        $now->addHour();
+        $now = $now->toDayDateTimeString();
 
-        //$this->isUserAdmin = $request->user()->hasRole('admin');
 
-        return view('home');//->with('isUserAdmin', $isUserAdmin);
+        return view('home', compact('now'));
     }
 
 }

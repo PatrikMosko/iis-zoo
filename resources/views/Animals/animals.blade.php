@@ -29,19 +29,17 @@
                 <td>{{ $animal->description }}</td>
                 <td>
                     <a class="btn btn-default" href="{{ route('animals.show',$animal->id) }}">Detail</a>
-                    @if($is_admin)
                     <a href="{{ route('animals.edit', $animal->id) }}" class="btn btn-primary">Edit</a>
 
                     {!! Form::open(['method' => 'DELETE','route' => ['animals.destroy', $animal->id],'style'=>'display:inline']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                     {!! Form::close() !!}
-                    @endif
+
                 </td>
             </tr>
         @endforeach
     </table>
 
-    @if($is_admin)
     <div class="row">
         <div class="col-md-12">
             <div class="pull-right">
@@ -52,11 +50,9 @@
             </div>
         </div>
     </div>
-    @endif
 
     @include('Animals/AnimalType/animal_type')
 
-    @if($is_admin)
     <div class="row">
         <div class="col-md-12">
             <div class="pull-right">
@@ -67,7 +63,6 @@
             </div>
         </div>
     </div>
-    @endif
 
     <div class="well invisible"></div>
 

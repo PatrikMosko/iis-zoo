@@ -21,13 +21,13 @@
         @auth
             <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;<li>
+                    <li>
                         <a href="{{ url('/') }}">Home</a>
                     </li>
-                    &nbsp;<li>
+                    <li>
                         <a href="{{ url('Feeding/feeding') }}">Feeding</a>
                     </li>
-                    &nbsp;<li>
+                    <li>
                         <a href="{{ url('Cleanings/cleanings') }}">Cleaning</a>
                     </li>
                     <li>
@@ -36,16 +36,6 @@
                     <li>
                         <a href="{{ url('Trainings/trainings')  }}">Education trainings</a>
                     </li>
-                    @if($is_admin)
-                    <li>
-                        <a href="{{ url('/settings') }}">Admin Settings</a>
-                    </li>
-                    @endif
-                    @if(!$is_admin)
-                    <li>
-                        <a href="{{ url('/settings/settingsUser') }}">User Settings</a>
-                    </li>
-                    @endif
                 </ul>
         @endauth
 
@@ -68,6 +58,16 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                @if($is_admin)
+                                    <li>
+                                        <a href="{{ url('/settings') }}">Admin Settings</a>
+                                    </li>
+                                @endif
+                                @if(!$is_admin)
+                                    <li>
+                                        <a href="{{ url('/settings/settingsUser') }}">User Settings</a>
+                                    </li>
+                                @endif
                                 <li>
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
