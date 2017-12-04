@@ -22,7 +22,7 @@
             {!! Form::text('phone', null, array('placeholder' => 'email','class' => 'form-control')) !!}
         </div>
         <span><strong>Birth date</strong></span>
-        <div class='form-group input-group date' id='just_date'>
+        <div class="form-group input-group date" id="date_picker">
             {!!Form::text('birth_date', null,
                 array('class' => 'form-control', 'placeholder' => 'click to calendar to open dialog...'))
             !!}

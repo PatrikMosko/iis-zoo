@@ -21,7 +21,7 @@
     {!! Form::model($user, ['method' => 'PATCH','route' => ['settings.update', $user->id]]) !!}
     {{csrf_field()}}
     {{ method_field('PATCH') }}
-    @include('form')
+    @include('Settings/Admin/form')
     {!! Form::close() !!}
 
     <div class="row">

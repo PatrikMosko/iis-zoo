@@ -6,6 +6,8 @@ use App\User;
 use App\Role;
 use Illuminate\Http\Request;
 use Auth;
+use App\Providers\AppServiceProvider;
+//use Illuminate\Support\Facades\Auth;
 
 class SettingsController extends Controller
 {
@@ -30,15 +32,14 @@ class SettingsController extends Controller
     public function index () {
 
         $users = User::all();
-
         //dd($users);
-        return view('settings')->with(['users' => $users]);
+        return view('Settings/Admin/settings')->with(['users' => $users]);
     }
 
     public function show($id){
         $user = User::find($id);
 
-        return view('detail', compact('user'));
+        return view('Settings/Admin/detail', compact('user'));
     }
 
     /**
@@ -52,7 +53,7 @@ class SettingsController extends Controller
         $user = User::find($id);
         $account_status = $user->is_active;
 //        print_r($user);
-        return view('edit', compact('user','account_status'));
+        return view('Settings/Admin/edit', compact('user','account_status'));
     }
 
 
@@ -97,8 +98,14 @@ class SettingsController extends Controller
         }
 
         // update instance
-        $user->where('id', '=', $user->id)->update(['user_name' => $user_name, 'is_active' => $is_active, 'full_name' => $full_name,
-            'phone' => $phone, 'birth_date' => $birth_date, 'email' => $email]);
+        $user->where('id', '=', $user->id)->update([
+            'user_name' => $user_name,
+            'is_active' => $is_active,
+            'full_name' => $full_name,
+            'phone'     => $phone,
+            'birth_date'=> $birth_date,
+            'email'     => $email
+        ]);
         /*
          *  update pivot
          */
@@ -137,5 +144,39 @@ class SettingsController extends Controller
 
         return redirect()->route('settings.index')
             ->with(['success','User deleted successfully']);
+    }
+
+    public function userIndex()
+    {
+        //get logged user
+        $user_auth = Auth::user();
+        $user = User::find($user_auth->id);
+
+        return view('Settings/User/edit', compact('user'));
+    }
+
+    public function userUpdate(Request $request, $id)
+    {
+        // validation of input
+        request()->validate([
+            'user_name' => 'required',
+            'email' => 'required',
+            'full_name' => 'required',
+            'phone' => 'required',
+            'birth_date' => 'required',
+        ]);
+
+        $user = User::find($id);
+
+        // update instance
+        $user->where('id', '=', $user->id)->update([
+            'user_name' => $request->get('user_name'),
+            'full_name' => $request->get('full_name'),
+            'phone'     => $request->get('phone'),
+            'birth_date'=> $request->get('birth_date'),
+            'email'     => $request->get('email')
+        ]);
+
+        return redirect()->route('settingsUser.index');
     }
 }

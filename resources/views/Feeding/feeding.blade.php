@@ -11,12 +11,14 @@
         <div class="col-md-6">
             <h2>feedings</h2>
         </div>
+        @if($is_admin)
         <div class="col-md-6 text-right">
             <a href="{{ route('feeding.create')  }}" class="btn btn-info">
                 <span class="glyphicon glyphicon-plus"></span>
                 Add new
             </a>
         </div>
+        @endif
     </div>
     <div class="row">
     @foreach($all_feedings as $feeding)
@@ -53,8 +55,9 @@
                     {{ $feeding->description }}
                 </div>
             </div>
-            <hr>
+            @if($is_admin)
             <div class="row">
+                <hr>
                 @foreach($feeding->animals as $animal)
                     <div class="col-md-6" style="margin-top: 18px; margin-bottom: 18px">
                         <div class="border" style="border: 1px solid lightgray; padding: 15px;">
@@ -88,6 +91,7 @@
                     {!! Form::close() !!}
                 </div>
             </div>
+            @endif
         </div>
     </div>
     @endforeach

@@ -61,7 +61,7 @@
     <div class="well invisible"></div>
 
     <div class="row text-center">
-        <a href="{{ route('animals.index') }}" class="btn btn-default">back</a>
+        <a href="{{ url()->previous() }}" class="btn btn-default">back</a>
     </div>
 
 @endsection
