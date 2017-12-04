@@ -12,16 +12,20 @@
     </div> <!-- end .flash-message -->
 
     <div class="row">
-        <div class="col-md-6">
-            <h2>cleanings</h2>
-        </div>
         @if($is_admin)
-        <div class="col-md-6 text-right">
-            <a href="{{ route('cleanings.create')  }}" class="btn btn-info">
-                <span class="glyphicon glyphicon-plus"></span>
-                Add new
-            </a>
-        </div>
+            <div class="col-md-6">
+                <h2>Cleanings</h2>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="{{ route('feeding.create')  }}" class="btn btn-info">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Add new
+                </a>
+            </div>
+        @else
+            <div class="col-md-6">
+                <h2>My cleanings</h2>
+            </div>
         @endif
     </div>
     <div class="row">

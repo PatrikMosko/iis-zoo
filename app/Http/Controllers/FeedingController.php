@@ -28,8 +28,13 @@ class FeedingController extends Controller
     // get all feedings
     public function index()
     {
-        // get all feedings
-        $all_feedings = Feeding::with('users')->get();
+
+        $my_id = auth()->user()->id;
+
+        if (User::find($my_id)->roles()->first()->id == 1)
+            $all_feedings = User::find($my_id)->feedings()->get();
+        else
+            $all_feedings = Feeding::with('users')->get();
 
         return view('Feeding/feeding', compact('all_feedings'));
     }
@@ -47,12 +52,15 @@ class FeedingController extends Controller
         // validation of input
         request()->validate([
             'feeder'  => 'required',
-            'amount'  => 'required|numeric',
+            'amount'  => 'required|numeric|min:',
             'unit'    => 'required',
             'animals' => 'required',
             'date'    => 'required',
             'time'    => 'required'
         ]);
+
+        if($params['amount'] == 0)
+            dd('je to nula');
 
         $params = $request->all();
 
@@ -61,6 +69,8 @@ class FeedingController extends Controller
         $new_feeding->amount_of_food = $params['amount'];
         $new_feeding->description    = $params['description'] ? $params['description']: '';
         $new_feeding->unit           = $params['unit'];
+        $new_feeding->date           = $params['date'];
+        $new_feeding->time           = $params['time'];
         $new_feeding->save();
 
         // update animal pivot table

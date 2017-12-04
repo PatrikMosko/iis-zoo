@@ -16,8 +16,14 @@ class CleaningsController extends Controller
     public function index(){
 
         // list of all cleanings
-        $cleanings = Cleaning::with('users')->get();
+
         $outlets = Outlet::all();
+        $my_id = auth()->user()->id;
+
+        if (User::find($my_id)->roles()->first()->id == 1)
+            $cleanings = User::find($my_id)->cleanings()->get();
+        else
+            $cleanings = Cleaning::with('users')->get();
 
         return view('Cleanings/cleanings', compact('cleanings', 'outlets'));
     }
