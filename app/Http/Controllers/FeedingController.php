@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Animal;
-use App\Outlet;
+use App\Feeding;
 use App\User;
 use DB;
 use Illuminate\Http\Request;
-
-use \App\Feeding;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Input;
 
 class FeedingController extends Controller
 {
@@ -52,22 +48,22 @@ class FeedingController extends Controller
         // validation of input
         request()->validate([
             'feeder'  => 'required',
-            'amount'  => 'required|numeric|min:',
+            'amount'  => array('required', 'numeric', 'regex:/^[^0]\d*$/u'),
             'unit'    => 'required',
             'animals' => 'required',
             'date'    => 'required',
             'time'    => 'required'
         ]);
 
+        $params = $request->all();
         if($params['amount'] == 0)
             dd('je to nula');
 
-        $params = $request->all();
 
         $new_feeding = new Feeding();
         $new_feeding->user_id        = current($params['feeder']); // pass user_id directly from blade, get value from associative array
         $new_feeding->amount_of_food = $params['amount'];
-        $new_feeding->description    = $params['description'] ? $params['description']: '';
+        $new_feeding->description    = $params['description'];
         $new_feeding->unit           = $params['unit'];
         $new_feeding->date           = $params['date'];
         $new_feeding->time           = $params['time'];

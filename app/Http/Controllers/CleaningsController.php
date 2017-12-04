@@ -54,6 +54,7 @@ class CleaningsController extends Controller
         $new_cleaning->description   = $params['description'];
         $new_cleaning->save();
 
+
         // update animal pivot table
         foreach($params['cleaner'] as $cleaner) {
             $new_cleaning->users()->attach($cleaner);
