@@ -10,10 +10,8 @@
 |
 */
 
-Route::group(['middleware' => 'web'], function () {
-    // Put routes in here
-
-
+//Route::group(['middleware' => 'web'], function () {
+//    // Put routes in here
 
 Route::get('/', 'HomeController@index')->name('home');
 /*
@@ -69,5 +67,5 @@ Route::delete(  '/Feeding/feeding/remove/{id}/{animal}/{count}',
                 ['as' => 'feeding.remove', 'uses' => 'FeedingController@remove']
 );
 
-});
+//});
 
