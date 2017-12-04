@@ -10,13 +10,20 @@ use Illuminate\Http\Request;
 
 class AnimalsController extends Controller
 {
-    public function index(){
-        // animals
-        $animals = Animal::all();
-        // types
+    public function index(Request $request){
+
+        $params = $request->all();
         $animal_types = AnimalType::all();
 
-        return view('Animals/animals', compact('animals', 'animal_types'));
+        if($request->has('search')){
+            $animals = Animal::search($request->get('search'))->get();
+            $searched_value = $params['search'];
+        }else{
+            $animals = Animal::get();
+            $searched_value ='';
+        }
+
+        return view('Animals/animals', compact('animals', 'animal_types', 'users', 'searched_value'));
     }
 
     public function create(){
@@ -158,4 +165,9 @@ class AnimalsController extends Controller
         $request->session()->flash('alert-success', 'Animal type was successfully deleted!');
         return redirect()->route('animals.index');
     }
+
+    //
+//    public function mySearch(Request $request){
+//
+//    }
 }

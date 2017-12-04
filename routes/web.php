@@ -23,7 +23,12 @@ Route::get   ('/Animals/animals/animalType/{id}/edit', 'AnimalsController@editAn
 Route::patch ('/Animals/animals/animalType/{id}'     , 'AnimalsController@updateAnimalType' )->name('animals.update_type');  // update
 Route::delete('/Animals/animals/animalType/{id}'     , 'AnimalsController@destroyAnimalType')->name('animals.destroy_type'); // update
 //Route::get('/Animals/animals/animalType', 'AnimalsController@someMethod');
+//Route::get('/Animals/animals/animalSearch'   , 'AnimalsController@mySearch' )->name('animals.search');  // search
 Route::resource('/Animals/animals', 'AnimalsController');
+
+//search
+//Route::get("mySearch","AnimalsController@mySearch");
+
 /*
  * settings
  */
