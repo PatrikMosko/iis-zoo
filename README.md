@@ -24,8 +24,8 @@
 
 To use application the database is seeding with users :
 
-* Administrator : user name = majko, password = poklop
-* User : email = manazer123, password = poklop
+* User  : login = majko, password = poklop
+* Administrator : login = manazer123, password = poklop
 
 ### License ###
 
